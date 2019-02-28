@@ -24,13 +24,14 @@ def use_cuda(enabled, device_id=0):
 
 
 def use_optimizer(network):
-    if Config['optimizer'] == 'adam':
-        optimizer = torch.optim.Adam(network.parameters(), lr=Config['adam_lr'], weight_decay=Config['l2_regularization'])
-    elif Config['optimizer'] == 'rmsprop':
+    if Config["training_config"]['optimizer'] == 'adam':
+        optimizer = torch.optim.Adam(network.parameters(), lr=Config["training_config"]['adam_lr'],
+                                     weight_decay=Config["training_config"]['l2_regularization'])
+    elif Config["training_config"]['optimizer'] == 'rmsprop':
         optimizer = torch.optim.RMSprop(network.parameters(),
-                                        lr=Config['rmsprop_lr'],
-                                        alpha=Config['rmsprop_alpha'],
-                                        momentum=Config['rmsprop_momentum'])
+                                        lr=Config["training_config"]['rmsprop_lr'],
+                                        alpha=Config["training_config"]['rmsprop_alpha'],
+                                        momentum=Config["training_config"]['rmsprop_momentum'])
     return optimizer
 
 

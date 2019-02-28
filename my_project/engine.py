@@ -10,10 +10,10 @@ from config import Config
 
 class Engine(object):
     def __init__(self):
-        self._writer = SummaryWriter(log_dir=Config["model_log_dir"])  # tensorboard writer
+        self._writer = SummaryWriter(log_dir=Config["normal_config"]["model_log_dir"])  # tensorboard writer
         # self._writer.add_text('config', str(config), 0)
         self.opt = use_optimizer(self.model)
-        self.crit = nn.CrossEntropyLoss()
+        self.crit = nn.BCELoss()
 
     def batch_forward(self, batch):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
@@ -21,35 +21,48 @@ class Engine(object):
         # [0, 1, 2, 3, 4, 5, 8, 9, 6, 7]
         # "user_id"0, "user_city"1, "item_id"2, "author_id"3, "item_city"4,
         # "channel"5, "finish"6, "like"7, "music_id"8, "device"9
-        uid = batch[0]
-        user_city = batch[1]
-        item_id = batch[2]
-        author_id = batch[3]
-        item_city = batch[4]
-        channel = batch[5]
-        music_id = batch[8]
-        device = batch[9]
-        finish = batch[6]
-        like = batch[7]
-        if Config['use_cuda'] is True:
-            uid = uid.cuda()
-            user_city = user_city.cuda()
-            item_id = item_id.cuda()
-            author_id = author_id.cuda()
-            item_city = item_city.cuda()
-            channel = channel.cuda()
-            music_id = music_id.cuda()
-            device = device.cuda()
+
+        # uid = batch[0]
+        # user_city = batch[1]
+        # item_id = batch[2]
+        # author_id = batch[3]
+        # item_city = batch[4]
+        # channel = batch[5]
+        # music_id = batch[8]
+        # device = batch[9]
+        X = batch[:, :8]
+        finish = batch[:, -2]
+        like = batch[:, -1]
+        if Config["normal_config"]['use_cuda'] is True:
+            # uid = uid.cuda()
+            # user_city = user_city.cuda()
+            # item_id = item_id.cuda()
+            # author_id = author_id.cuda()
+            # item_city = item_city.cuda()
+            # channel = channel.cuda()
+            # music_id = music_id.cuda()
+            # device = device.cuda()
+            X = X.cuda()
             finish = finish.cuda()
             like = like.cuda()
         finish = finish.float()
         like = like.float()
 
+        # print("X: ", X)
+        # print("finish: ", finish)
+        # print("like: ", like)
+
         # clear gradient history
         self.opt.zero_grad()
-        finish_pred, like_pred = self.model(uid, user_city, item_id, author_id,
-                                            item_city, channel, music_id, device)
+        # finish_pred, like_pred = self.model(uid, user_city, item_id, author_id,
+        #                                     item_city, channel, music_id, device)
 
+        finish_pred, like_pred = self.model(X)
+
+        # print(finish_pred.size())
+        # print(like_pred.size())
+        # print(finish.size())
+        # print(like.size())
         # cal loss
         finish_loss = self.crit(finish_pred, finish)
         like_loss = self.crit(like_pred, like)
@@ -57,10 +70,10 @@ class Engine(object):
 
         # cal auc
         # finish_auc
-        finish_auc = cal_auc(finish.cpu().numpy(), finish_pred.cpu().numpy())
+        finish_auc = cal_auc(finish.cpu().detach().numpy(), finish_pred.cpu().detach().numpy())
 
         # like_auc
-        like_auc = cal_auc(like.cpu().numpy(), like_pred.cpu().numpy())
+        like_auc = cal_auc(like.cpu().detach().numpy(), like_pred.cpu().detach().numpy())
 
         return finish, finish_pred, like, like_pred, loss, finish_loss, like_loss, finish_auc, like_auc
 
@@ -81,7 +94,7 @@ class Engine(object):
         loss.backward()
         self.opt.step()
 
-        return loss.cpu().numpy(), finish_loss, like_loss, finish_auc, like_auc
+        return loss.cpu().detach().numpy(), finish_loss, like_loss, finish_auc, like_auc
 
     def train_an_epoch(self, train_loader, epoch_id):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
@@ -158,5 +171,8 @@ class Engine(object):
 
     def save(self, epoch_id, auc):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
-        model_dir = Config['model_dir'].format(Config["model_name"], auc, epoch_id)
+        model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"], auc, epoch_id)
         save_checkpoint(self.model, model_dir)
+
+    def predict(self):
+        pass

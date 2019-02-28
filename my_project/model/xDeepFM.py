@@ -10,45 +10,26 @@ from torch.autograd import Variable as V
 from torch import nn
 from torch.nn import functional as F
 from torch import optim
-
-"""
-   config: for the parameters, may be later load from a json file 
-"""
-config = {
-        "id":{
-                "uid_num": 200,
-                "user_city_num": 200,
-                "item_id_num": 200,
-                "author_id_num": 200,
-                "item_city_num": 200,
-                "channel_num": 200,
-                "music_id_num": 200,
-                "device_num": 200
-                },
-        
-        "CIN":{
-                "k": 5,
-                "m": 8,
-                "D": 100,
-                "H": 20
-                },
-                
-        "DNN":{
-                "num_layers": 3,
-                "in_dim": 8 * 100,
-                "out_dim_list": [200, 100, 100]
-                }
-        }
+from .base_model import BaseModel
 
 
-class xDeepFM(nn.Module):
+class xDeepFM(nn.Module, BaseModel):
     def __init__(self, config):
         super(xDeepFM, self).__init__()
+        # store some config
         self.config = config
-        self.emb_layers = [nn.Embedding(config["id"][key],config["CIN"]["D"]) for key in self.config["id"]]
-        self.cin = CIN(config["CIN"])
-        self.dnn = DNN(config["DNN"])
-        dim = config["CIN"]["m"] * config["CIN"]["D"] + config["CIN"]["k"] * config["CIN"]["H"] + config["DNN"]["out_dim_list"][-1]
+        self.model_config = config["model_config"]["xDeepFM_config"]
+        self.data_config = config["data_config"]
+        model_config = config["model_config"]["xDeepFM_config"]
+        data_config = config["data_config"]
+
+        # model structure
+        self.emb_layers = [nn.Embedding(data_config[key], model_config["CIN"]["D"]) for key in data_config]
+        self.cin = CIN(model_config["CIN"])
+        self.dnn = DNN(model_config["DNN"])
+        dim = model_config["CIN"]["m"] * model_config["CIN"]["D"] +\
+              model_config["CIN"]["k"] * model_config["CIN"]["H"] +\
+              model_config["DNN"]["out_dim_list"][-1]
         self.lin = nn.Linear(dim, 2)
         
     def forward(self, x):
@@ -60,9 +41,9 @@ class xDeepFM(nn.Module):
             res: 0.5, 0.5
         """
         batch_size, num_features = x.size()
-        if num_features != self.config["CIN"]["m"]:
+        if num_features != self.model_config["CIN"]["m"]:
             raise ValueError("Check the dimention of your features, " \
-                             "Expect %d, but got %d!"%(self.config["CIN"]["m"], num_features))
+                             "Expect %d, but got %d!"%(self.model_config["CIN"]["m"], num_features))
         
          
         x_1 = []
@@ -85,10 +66,13 @@ class xDeepFM(nn.Module):
         x_33 = self.dnn(x_23) # batch * 1 * outdim=100
         
         x_cat = t.cat([x_21, x_32, x_33], 2) # batch * 1 * (m*D + H*k + outdim)
-        y = t.sigmoid(self.lin(x_cat))
-        
-        return y
-    
+        y = t.sigmoid(self.lin(x_cat)).squeeze(1)
+
+        return y[:, 0], y[:, 1]
+
+    def init_weight(self):
+        pass
+
     
 class CIN(nn.Module):
     def __init__(self, conf):

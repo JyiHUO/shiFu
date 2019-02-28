@@ -9,4 +9,5 @@ class FM(nn.Module):
         self.config = config
 
 
-    def forward(self, ):
+    def forward(self, x):
+        pass

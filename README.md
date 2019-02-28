@@ -4,8 +4,15 @@
 ```shell
 shiFu/ # 我们的github1项目    
     my_project/ # 存放我们的项目代码
-    	...
+    	data.py # 生成data_loader
+    	data_process.py # 数据预处理，split，generate hd5
+    	engine.py # 封装train,val,predict方法
+    	models_engine.py # 工厂模式，封装engine.py和model/...py
+    	utils.py # 一些有用的方法
+    	train.py # main方法
+    	config.py # 运行的所有配置
     	model/ # 存放模型.py
+    		xDeepFM.py
     		...
     baseline/ # 已经公开的源代码
         FM/
@@ -51,3 +58,14 @@ python data_process.py # 切分成train-val（8:2），生成hd5文件
 python train.py
 ```
 
+## 如何实现新想法
+
+你只需要在`model/`文件夹下添加你的**模型文件**和在`config.py`**添加模型配置就可以了**。
+
+### 如何编写模型文件
+
+接口...
+
+### 如何添加配置
+
+`config.py`

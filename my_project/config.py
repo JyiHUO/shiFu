@@ -6,13 +6,15 @@ track = "track2"
 Config = {}
 
 if track == "track2":
-    normal_setting = {
+    normal_config = {
+        "model_name": "xDeepFM",
         "large_file": False,
-        'use_cuda': True,
+        'use_cuda': False,
         'device_id': 0,
         'pretrain': False,
-        'pretrain_model_dir': '',
+        'pretrain_model_dir': '../../../checkpoints/',
         'model_dir': '../../checkpoints/{}_auc_{}_Epoch{}.model',
+        "model_log_dir": "../../cache/track2/runs/",
         "train_path": "../../cache/track2/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
         "val_path": "../../cache/track2/tmp/val.csv",
         "test_path": "../../cache/track2/tmp/test.csv",
@@ -22,35 +24,49 @@ if track == "track2":
         "raw_data_path": "../../data/track2/final_track2_train.txt"
     }
 
-    model_setting = {
-        'model_name': 'xDeepFM',
+    model_config = {
+        'xDeepFM_config': {
+            "CIN": {
+                "k": 5,
+                "m": 8,
+                "D": 100,
+                "H": 20
+            },
+
+            "DNN": {
+                "num_layers": 3,
+                "in_dim": 8 * 100,
+                "out_dim_list": [200, 100, 100]
+            }
+        }
+    }
+
+    training_config = {
         'num_epoch': 100,
         'batch_size': 1024,
         'optimizer': 'adam',
-        'adam_lr': 1e-2,
-        'latent_dim': 8,
-        'num_negative': 4,
-        'layers': [128,64,64,48,32,16,16,8],  # layers[0] is the concat of latent user vector & latent item vector
-        'l2_regularization': 0.0000001,
+        'adam_lr': 0.0001,
+        'l2_regularization': 0.0000001
     }
 
-    data_setting = OrderedDict({
+    data_config = OrderedDict({
         'uid': 73974,
-        'user_city': 396,
+        'user_city': 397,
         'item_id': 4122689,
         'author_id': 850308,
-        'item_city': 461,
+        'item_city': 462,
         'channel': 5,
-        'music_id': 89778,
+        'music_id': 89779,
         'device': 75085,
     })
 
-    Config.update(normal_setting)
-    Config.update(model_setting)
-    Config["data_setting"] = data_setting
+    Config["normal_config"] = normal_config
+    Config["model_config"] = model_config
+    Config["training_config"] = training_config
+    Config["data_config"] = data_config
 else:
     # this is for track1
-    normal_setting = {
+    normal_config = {
         "large_file": False,
         'use_cuda': True,
         'device_id': 0,
@@ -66,7 +82,7 @@ else:
         "raw_data_path": "../../data/track1/final_track1_train.txt"
     }
 
-    model_setting = {
+    model_config = {
         'model_name': 'xDeepFM',
         'num_epoch': 100,
         'batch_size': 1024,
@@ -78,8 +94,7 @@ else:
         'l2_regularization': 0.0000001,
     }
 
-
-    data_setting = {
+    data_config = {
         'uid': 73974,
         'user_city' :  396,
         'item_id' :  4122604,
@@ -90,6 +105,15 @@ else:
         'device': 75085,
     }
 
-    Config.update(normal_setting)
-    Config.update(data_setting)
-    Config.update(model_setting)
+    training_config = {
+        'num_epoch': 100,
+        'batch_size': 1024,
+        'optimizer': 'adam',
+        'adam_lr': 1e-2,
+        'l2_regularization': 0.0000001
+    }
+
+    Config["normal_config"] = normal_config
+    Config["model_config"] = model_config
+    Config["training_config"] = training_config
+    Config["data_config"] = data_config

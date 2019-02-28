@@ -2,20 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f5e422fb-7423-4642-ba7b-9c202daa706a" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../xDeepFM/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../xDeepFM/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../my_project/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../my_project/.idea/other.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../my_project/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../my_project/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../my_project/model/FM.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../my_project/model/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../my_project/model/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../my_project/model/base_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../my_project/models_engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_io/data_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_io/data_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../xDeepFM/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../xDeepFM/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/data_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/data_process.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/model/FM.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/model/FM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/model/mlp.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/model/test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/model/xDeepFM.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/model/xDeepFM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/predict.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/train.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../my_project/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../my_project/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +36,7 @@
         <entry file="file://$PROJECT_DIR$/data_io/data_parser.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="296">
-              <caret line="80" column="37" lean-forward="true" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
+              <caret line="80" column="37" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -45,8 +47,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model_zoo/fm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+            <state relative-caret-position="120">
+              <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -248,12 +250,12 @@
       <updated>1550906896378</updated>
       <workItem from="1551061413631" duration="561000" />
       <workItem from="1551064273477" duration="669000" />
-      <workItem from="1551258485042" duration="8141000" />
+      <workItem from="1551258485042" duration="9684000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9371000" />
+    <option name="totallyTimeSpent" value="10914000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="45" y="27" width="1380" height="877" extended-state="6" />
@@ -265,7 +267,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.40382165" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.40382165" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -349,7 +351,7 @@
     <entry file="file://$PROJECT_DIR$/data_io/data_parser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
-          <caret line="80" column="37" lean-forward="true" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
+          <caret line="80" column="37" selection-start-line="80" selection-start-column="37" selection-end-line="80" selection-end-column="37" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -378,8 +380,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model_zoo/fm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="81" column="34" selection-start-line="81" selection-start-column="34" selection-end-line="81" selection-end-column="34" />
+        <state relative-caret-position="120">
+          <caret line="77" column="24" selection-start-line="77" selection-start-column="24" selection-end-line="77" selection-end-column="24" />
         </state>
       </provider>
     </entry>

@@ -1,17 +1,16 @@
-from model.mlp import MLPEngine
 from data import SampleGenerator
 from config import Config
+from models_engine import ModelEngine
+from model.xDeepFM import xDeepFM
 
-
-engine = MLPEngine(Config)
+engine = ModelEngine(config=Config, model=xDeepFM)
 sample_generator = SampleGenerator()
 
-global_step = 0
-for epoch in range(Config['num_epoch']):
+for epoch in range(Config["training_config"]['num_epoch']):
     print('Epoch {} starts!'.format(epoch))
     print('-' * 80)
     train_loader = sample_generator.instance_a_loader(t="train")
-    engine.train_an_epoch(train_loader, epoch_id=global_step)
+    engine.train_an_epoch(train_loader, epoch_id=epoch)
     
     evaluate_loader = sample_generator.instance_a_loader(t="val")
     test_score, auc = engine.evaluate(evaluate_loader, epoch_id=epoch)
