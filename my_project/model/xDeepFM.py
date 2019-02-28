@@ -96,6 +96,7 @@ class CIN(nn.Module):
         x_0 = x_0 * x_0
         x_0 = x_0.contiguous().view((-1, self.D, self.m*self.m))
         x_1 = self.lin(x_0) # -1, self.D, self.H
+        x_1 = F.relu(x_1)
         x_list = [x_1]
         for layer in self.layers:
             x_k = x_1.unsqueeze(2).expand([-1, self.D, self.m, self.H])
@@ -103,6 +104,7 @@ class CIN(nn.Module):
             z_k = x_0 * x_k
             z_k = z_k.contiguous().view(-1, self.D, self.m*self.H)
             x_k = layer(z_k)
+            x_k = F.relu(x_k)
             x_list.append(x_k)
             x_1 = x_k
         all_x = t.cat(x_list, 2) # -1, self.D, self.H*self.k

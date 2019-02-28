@@ -2,6 +2,7 @@ from data import SampleGenerator
 from config import Config
 from models_engine import ModelEngine
 from model.xDeepFM import xDeepFM
+from model.mlp import MLP
 
 engine = ModelEngine(config=Config, model=xDeepFM)
 sample_generator = SampleGenerator()

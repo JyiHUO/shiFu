@@ -7,7 +7,7 @@ Config = {}
 
 if track == "track2":
     normal_config = {
-        "model_name": "xDeepFM",
+        "model_name": "MLP",
         "large_file": False,
         'use_cuda': False,
         'device_id': 0,
@@ -38,6 +38,10 @@ if track == "track2":
                 "in_dim": 8 * 100,
                 "out_dim_list": [200, 100, 100]
             }
+        },
+        'MLP_config': {
+            "k": 50,
+            "layers": [200, 64, 32, 16, 2]
         }
     }
 
@@ -45,7 +49,7 @@ if track == "track2":
         'num_epoch': 100,
         'batch_size': 1024,
         'optimizer': 'adam',
-        'adam_lr': 0.0001,
+        'adam_lr': 0.001,
         'l2_regularization': 0.0000001
     }
 
@@ -83,7 +87,7 @@ else:
     }
 
     model_config = {
-        'model_name': 'xDeepFM',
+        'model_name': 'MLP',
         'num_epoch': 100,
         'batch_size': 1024,
         'optimizer': 'adam',
