@@ -12,32 +12,32 @@ def main():
   tf.logging.set_verbosity(tf.logging.INFO)
 
   # init necessary args
-  args = init_model_args()
+  # args = init_model_args()
 
   #train_dataset_path_list = get_dataset_path_list(train_dataset_path, sub_str="track2_train_time.txt")
-  train_dataset_path_list = [args.training_path]
+  train_dataset_path_list = "../../../data/track2/final_track2_train.txt"
 
-  val_dataset_path_list = [args.validation_path]
-  print "training path list: {}".format(train_dataset_path_list)
-  print "training path list: {}".format(val_dataset_path_list)
+  val_dataset_path_list = "../../../data/track2/final_track2_train.txt"
+  print ("training path list: {}".format(train_dataset_path_list))
+  print ("training path list: {}".format(val_dataset_path_list))
 
-  save_model_dir = args.save_model_dir
-  print "saving model in ... {}".format(save_model_dir)
+  save_model_dir = "../../../data/"
+  print ("saving model in ... {}".format(save_model_dir))
 
-  optimizer = args.optimizer
-  learning_rate  = args.lr
-  print "we use {} as optimizer".format(optimizer)
-  print "learning rate is set as  {}".format(learning_rate)
+  optimizer = "adam"
+  learning_rate  = 0.0005
+  print ("we use {} as optimizer".format(optimizer))
+  print ("learning rate is set as  {}".format(learning_rate))
 
-  batch_size = args.batch_size
-  embedding_size = args.embedding_size
-  num_epochs = args.num_epochs
-  print "batch size: {}".format(batch_size)
-  print "embedding size: {}".format(embedding_size)
+  batch_size = 128
+  embedding_size = 8
+  num_epochs = 1
+  print ("batch size: {}".format(batch_size))
+  print ("embedding size: {}".format(embedding_size))
 
-  task = args.task
-  track = args.track
-  print "track: {}, task: {}".format(track, task)
+  task = "finish"
+  track = 2
+  print ("track: {}, task: {}".format(track, task))
 
 
   model = RecommendModelHandler(
@@ -50,7 +50,7 @@ def main():
       embedding_size=embedding_size,
       task=task,
       track=track,
-      learning_rate=args.lr)
+      learning_rate=learning_rate)
 
   model.train()
 

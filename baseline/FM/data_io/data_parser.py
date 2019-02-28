@@ -20,7 +20,7 @@ class PosShifts(object):
   @staticmethod
   def get_features_num():
     index_shift = PosShifts._shifts
-    all_shift = reduce(lambda x, y: x+y, index_shift)
+    all_shift = np.sum(index_shift)
     return all_shift
 
 
@@ -65,11 +65,12 @@ class DataParser(object):
   @staticmethod
   def data_parser(line, label_index):
     """ parser line content and generate idx, features, and gts """
-    content = line.split('\t')
+    print(line)
+    content = line.decode("utf-8").split('\t')
     label = np.float32(content[label_index].strip())
     feature_num = 5
     features = content[:feature_num+1]
-    features = map(lambda feature: np.float32(feature), features)
+    features = list(map(lambda feature: np.float32(feature), features))
     idx = [0 if feature < 0 else feature  for feature in features]
     features = [np.float32(0) if feature < 0 else np.float32(1) for feature in features]
     features = features[:feature_num]
@@ -77,7 +78,7 @@ class DataParser(object):
     idx = idx[:feature_num]
 
     shifts = PosShifts.shift()
-    idx = [idx[i] + shifts[i] for i in xrange(len(idx))]
+    idx = [idx[i] + shifts[i] for i in range(len(idx))]
 
-    idx= map(lambda one_id: np.int32(one_id), idx)
+    idx= list(map(lambda one_id: np.int32(one_id), idx))
     return idx, features, label

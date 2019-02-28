@@ -59,7 +59,7 @@ class RecommendModelHandler(object):
     elif self._task == "like":
       dataset = dataset.map(LineParser.parse_like_line)
     else:
-      raise Exception("unknown task", task)
+      raise Exception("unknown task")
 
     dataset = dataset.shuffle(buffer_size=300)
     dataset = dataset.repeat(self._num_epochs)

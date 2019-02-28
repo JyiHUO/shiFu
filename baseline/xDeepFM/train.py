@@ -1,12 +1,18 @@
 import pandas as pd
 from deepctr import SingleFeat
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
-
+from tensorflow.keras import backend as K
 from model import xDeepFM_MTL
+import tensorflow as tf
 
 ONLINE_FLAG = True
 loss_weights = [1, 1, ]  # [0.7,0.3]任务权重可以调下试试
 VALIDATION_FRAC = 0.2  # 用做线下验证数据比例
+
+def auc(y_true, y_pred):
+    auc = tf.metrics.auc(y_true, y_pred)[1]
+    K.get_session().run(tf.local_variables_initializer())
+    return auc
 
 if __name__ == "__main__":
     data = pd.read_csv('./input/final_track2_train.txt', sep='\t', names=[
@@ -52,7 +58,7 @@ if __name__ == "__main__":
 
     model = xDeepFM_MTL({"sparse": sparse_feature_list,
                          "dense": dense_feature_list})
-    model.compile("adagrad", "binary_crossentropy", loss_weights=loss_weights,)
+    model.compile("adagrad", "binary_crossentropy", loss_weights=loss_weights, metrics=[auc])
 
     if ONLINE_FLAG:
         history = model.fit(train_model_input, train_labels,
