@@ -153,10 +153,11 @@ class Engine(object):
         self._writer.add_scalar('test_performance/total_like_loss', total_like_loss, epoch_id)
         self._writer.add_scalar('test_performance/finish_auc', total_finish_auc, epoch_id)
         self._writer.add_scalar('test_performance/like_auc', total_like_auc, epoch_id)
+        return total_finish_auc, total_like_auc
 
     def save(self, epoch_id, auc):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
-        model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"], auc, epoch_id)
+        model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"], auc[0], auc[1], epoch_id)
         save_checkpoint(self.model, model_dir)
 
     def predict(self, batch):

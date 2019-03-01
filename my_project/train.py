@@ -14,7 +14,7 @@ for epoch in range(Config["training_config"]['num_epoch']):
     engine.train_an_epoch(train_loader, epoch_id=epoch)
     
     evaluate_loader = sample_generator.instance_a_loader(t="val")
-    test_score, auc = engine.evaluate(evaluate_loader, epoch_id=epoch)
+    auc = engine.evaluate(evaluate_loader, epoch_id=epoch)
     engine.save(epoch, auc=auc)
 
 # close hd5 file

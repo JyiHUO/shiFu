@@ -7,14 +7,14 @@ Config = {}
 
 if track == "track2":
     normal_config = {
-        "model_name": "MLP",
+        "model_name": "xDeepFM",
         "large_file": False,
-        'use_cuda': False,
+        'use_cuda': True,
         'device_id': 0,
         "num_workers": 8,
         'pretrain': False,
         'pretrain_model_dir': '../../../checkpoints/',
-        'model_dir': '../../checkpoints/{}_auc_{}_Epoch{}.model',
+        'model_dir': '../../checkpoints/{}_finish_auc_{}_like_auc_{}_Epoch{}.model',
         "model_log_dir": "../../cache/track2/runs/",
         "train_path": "../../cache/track2/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
         "val_path": "../../cache/track2/tmp/val.csv",
@@ -49,7 +49,7 @@ if track == "track2":
 
     training_config = {
         'num_epoch': 100,
-        'batch_size': 64,
+        'batch_size': 2**13,
         'optimizer': 'adam',
         'adam_lr': 0.001,
         'l2_regularization': 0.0000001
