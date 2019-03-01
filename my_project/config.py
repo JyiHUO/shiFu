@@ -11,6 +11,7 @@ if track == "track2":
         "large_file": False,
         'use_cuda': False,
         'device_id': 0,
+        "num_workers": 8,
         'pretrain': False,
         'pretrain_model_dir': '../../../checkpoints/',
         'model_dir': '../../checkpoints/{}_auc_{}_Epoch{}.model',
@@ -47,7 +48,7 @@ if track == "track2":
 
     training_config = {
         'num_epoch': 100,
-        'batch_size': 1024,
+        'batch_size': 64,
         'optimizer': 'adam',
         'adam_lr': 0.001,
         'l2_regularization': 0.0000001

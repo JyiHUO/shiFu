@@ -24,7 +24,7 @@ class xDeepFM(nn.Module, BaseModel):
         data_config = config["data_config"]
 
         # model structure
-        self.emb_layers = [nn.Embedding(data_config[key], model_config["CIN"]["D"]) for key in data_config]
+        self.emb_layers = nn.ModuleList([nn.Embedding(data_config[key], model_config["CIN"]["D"]) for key in data_config])
         self.cin = CIN(model_config["CIN"])
         self.dnn = DNN(model_config["DNN"])
         dim = model_config["CIN"]["m"] * model_config["CIN"]["D"] +\
@@ -83,7 +83,7 @@ class CIN(nn.Module):
         self.D = self.conf["D"]
         self.H = self.conf["H"]
         self.lin = nn.Linear(self.m*self.m, self.H, bias=False)
-        self.layers = []
+        self.layers = nn.ModuleList([])
         for i in range(1, self.k):
             self.layers.append(nn.Linear(self.m*self.H, self.H, bias=False))
     
@@ -116,7 +116,7 @@ class DNN(nn.Module):
     def __init__(self, conf):
         super(DNN, self).__init__()
         self.conf = conf
-        self.layers = []
+        self.layers = nn.ModuleList([])
         start = self.conf["in_dim"]
         for i in range(self.conf["num_layers"]):
             end = self.conf["out_dim_list"][i]

@@ -64,5 +64,5 @@ class SampleGenerator(object):
         else:
             shuffle = False
         return DataLoader(dataset, batch_size=Config["training_config"]["batch_size"],
-                          shuffle=shuffle, num_workers=16)
+                          shuffle=shuffle, num_workers=Config["normal_config"]["num_workers"])
 
