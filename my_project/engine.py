@@ -188,4 +188,4 @@ class Engine(object):
                                finish_probability[:, None], like_probability[:, None]], 1)
         df = pd.DataFrame(data, columns=["uid", "item_id",
                                          "finish_probability", "like_probability"])
-        df.to_csv(Config["normal_config"][""], index=None, float_format="%.6f")
+        df.to_csv(Config["normal_config"]["predict_file"], index=None, float_format="%.6f")
