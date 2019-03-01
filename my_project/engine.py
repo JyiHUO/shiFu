@@ -6,6 +6,7 @@ from utils import save_checkpoint, use_optimizer
 import numpy as np
 from utils import cal_auc
 from config import Config
+import pandas as pd
 
 
 class Engine(object):
@@ -159,5 +160,32 @@ class Engine(object):
         model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"], auc[0], auc[1], epoch_id)
         save_checkpoint(self.model, model_dir)
 
-    def predict(self, batch):
-        pass
+    def predict(self, test_data):
+        assert hasattr(self, 'model'), 'Please specify the exact model !'
+        self.model.eval()
+        uid = []
+        item_id = []
+        finish_pred_list = []
+        like_pred_list = []
+
+        for batch_id, batch in enumerate(test_data):
+            assert isinstance(batch[0], torch.LongTensor)
+            finish, finish_pred, like, like_pred, \
+            loss, finish_loss, like_loss, \
+            finish_auc, like_auc = self.batch_forward(batch)
+
+            uid.append(batch[:, 0].cpu().detach().numpy())
+            item_id.append(batch[:, 2].cpu().detach().numpy())
+            finish_pred_list.append(finish_pred.cpu().detach().numpy())
+            like_pred_list.append(like_pred.cpu().detach().numpy())
+
+        uid = np.concatenate(uid)
+        item_id = np.concatenate(item_id)
+        finish_probability = np.concatenate(finish_pred_list)
+        like_probability = np.concatenate(like_pred_list)
+
+        data = np.concatenate([uid[:, None], item_id[:, None],
+                               finish_probability[:, None], like_probability[:, None]], 1)
+        df = pd.DataFrame(data, columns=["uid", "item_id",
+                                         "finish_probability", "like_probability"])
+        df.to_csv(Config["normal_config"][""], index=None, float_format="%.6f")

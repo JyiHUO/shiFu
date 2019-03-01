@@ -23,7 +23,8 @@ if track == "track2":
         'hd5_train_path': "../../cache/track2/tmp/hd5_train.hd5",
         "hd5_val_path": "../../cache/track2/tmp/hd5_val.hd5",
         "raw_test_path": '../../data/track2/final_track2_test_no_anwser.txt',
-        "raw_data_path": "../../data/track2/final_track2_train.txt"
+        "raw_data_path": "../../data/track2/final_track2_train.txt",
+        "predict_file": "../../cache/track2/result/result.csv"
     }
 
     model_config = {
