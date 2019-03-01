@@ -40,9 +40,6 @@ class Engine(object):
         finish = finish.float()
         like = like.float()
 
-        # clear gradient history
-        self.opt.zero_grad()
-
         finish_pred, like_pred = self.model(X)
 
         # print(finish_pred.size())
@@ -72,6 +69,8 @@ class Engine(object):
         :return:
         '''
         assert hasattr(self, 'model'), 'Please specify the exact model !'
+        # clear gradient history
+        self.opt.zero_grad()
         finish, finish_pred, like, like_pred,\
         loss, finish_loss, like_loss, \
         finish_auc, like_auc = self.batch_forward(batch)
