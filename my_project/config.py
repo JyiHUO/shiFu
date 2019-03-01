@@ -7,7 +7,7 @@ Config = {}
 
 if track == "track2":
     normal_config = {
-        "model_name": "xDeepFM",
+        "model_name": "DTFM",
         "large_file": False,
         'use_cuda': True,
         'device_id': 0,
@@ -42,9 +42,43 @@ if track == "track2":
                 "out_dim_list": [200, 100, 100]
             }
         },
+
         'MLP_config': {
             "k": 50,
             "layers": [200, 64, 32, 16, 2]
+        },
+
+        "DTFM": {
+            "id":{
+                "uid_num": 73974,
+                "user_city_num": 397,
+                "item_id_num": 4122689,
+                "author_id_num": 850308,
+                "item_city_num": 462,
+                "channel_num": 5,
+                "music_id_num": 89779,
+                "device_num": 75085
+                },
+            "CIN":{
+                    "k": 5,
+                    "m": 8,
+                    "D": 100,
+                    "H": 20
+                    },
+
+            "DNN":{
+                    "num_layers": 3,
+                    "in_dim": 8 * 100,
+                    "out_dim_list": [200, 100, 100]
+                    },
+
+            "TF":{
+                    "input_dim": 100,
+                    "num_layers": 3,
+                    "head_num_list": [10, 5, 2, 1],
+                    "head_num_list_length": 4,
+                    "forward_dim": 200
+                    }
         }
     }
 

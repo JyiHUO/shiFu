@@ -15,44 +15,12 @@ from torch import optim
 """
    config: for the parameters, may be later load from a json file 
 """
-config = {
-        "id":{
-                "uid_num": 200,
-                "user_city_num": 200,
-                "item_id_num": 200,
-                "author_id_num": 200,
-                "item_city_num": 200,
-                "channel_num": 200,
-                "music_id_num": 200,
-                "device_num": 200
-                },
-        
-        "CIN":{
-                "k": 5,
-                "m": 8,
-                "D": 100,
-                "H": 20
-                },
-                
-        "DNN":{
-                "num_layers": 3,
-                "in_dim": 8 * 100,
-                "out_dim_list": [200, 100, 100]
-                },
-        
-        "TF":{
-                "input_dim": 100,
-                "num_layers": 3,
-                "head_num_list": [10, 5, 2, 1],
-                "head_num_list_length": 4,
-                "forward_dim": 200
-                }
-        }
 
 
 class DTFM(nn.Module):
     def __init__(self, config):
         super(DTFM, self).__init__()
+        config = config["model_config"]["DTFM"]
         self.config = config
         self.emb_layers = nn.ModuleList([nn.Embedding(config["id"][key],config["CIN"]["D"]) for key in self.config["id"]])
         self.cin = CIN(config["CIN"])
@@ -104,7 +72,7 @@ class DTFM(nn.Module):
         x_cat = t.cat([x_21, x_32, x_33, x_34], 2) # batch * 1 * (m*D + H*k + outdim + head_list_length*D)
         y = t.sigmoid(self.lin(x_cat)).squeeze(1)
         
-        return y
+        return y[:, 0], y[:, 1]
     
     
 class CIN(nn.Module):
@@ -230,18 +198,3 @@ class TF(nn.Module):
             x_list = z_list
         batch_size = x.size()[0]
         output = t.sum(t.cat(x_list, 2), 1).contiguous().view(batch_size, 1, -1) # batch *
-        
-        return output
-            
-        
-    
-            
-        
-def test():
-    x = V(t.LongTensor([[1,2,3,4,5,6,7,8],[8,6,5,3,2,1,32,4],[8,7,6,5,4,43,23,1]]))
-    model = DTFM(config)
-    y = model(x)
-    print(y)
-    
-if __name__ == "__main__":
-    test()
