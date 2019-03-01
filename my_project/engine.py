@@ -125,9 +125,9 @@ class Engine(object):
             print('[Training Epoch {}] Batch {}, Loss {}, finish_loss {}, like_loss {}, finish_auc {}, like_auc {}'.format(
                     epoch_id, batch_id, loss, finish_loss, like_loss, finish_auc, like_auc))
 
-            total_loss.append(loss)
-            total_finish_loss.append(finish_loss)
-            total_like_loss.append(like_loss)
+            total_loss.append(loss.cpu().detach().numpy())
+            total_finish_loss.append(finish_loss.cpu().detach().numpy())
+            total_like_loss.append(like_loss.cpu().detach().numpy())
             finish_pred_list.append(finish_pred.cpu().detach().numpy())
             finish_list.append(finish.cpu().detach().numpy())
             like_pred_list.append(like_pred.cpu().detach().numpy())
