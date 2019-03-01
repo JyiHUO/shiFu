@@ -179,8 +179,8 @@ class Engine(object):
             finish_pred_list.append(finish_pred.cpu().detach().numpy())
             like_pred_list.append(like_pred.cpu().detach().numpy())
 
-        uid = np.concatenate(uid)
-        item_id = np.concatenate(item_id)
+        uid = np.concatenate(uid).astype(int)
+        item_id = np.concatenate(item_id).astype(int)
         finish_probability = np.concatenate(finish_pred_list)
         like_probability = np.concatenate(like_pred_list)
 
