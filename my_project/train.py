@@ -19,11 +19,5 @@ for epoch in range(Config["training_config"]['num_epoch']):
     auc = engine.evaluate(evaluate_loader, epoch_id=epoch)
     engine.save(epoch, auc=auc)
 
-print()
-print("------------start testing--------------")
-test_loader = sample_generator.instance_a_loader(t="test")
-engine.predict(test_loader)
-print("------------finish testing")
-
 
 # close hd5 file
