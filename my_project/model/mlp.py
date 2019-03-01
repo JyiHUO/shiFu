@@ -16,7 +16,7 @@ class MLP(nn.Module, BaseModel):
         k = model_config["k"]
         num_feature = len(data_config)
         layers = model_config["layers"]
-        self.emb_layers = [nn.Embedding(data_config[key], model_config["k"]) for key in data_config]
+        self.emb_layers = nn.ModuleList([nn.Embedding(data_config[key], model_config["k"]) for key in data_config])
         self.linear1 = nn.Linear(in_features=num_feature*k, out_features=layers[0])
         self.linear_layers = [nn.Linear(layers[i-1], layers[i]) for i in range(1, len(layers))]
 

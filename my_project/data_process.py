@@ -42,5 +42,7 @@ val.to_csv(Config["normal_config"]["val_path"], index=False)
 print("finish val")
 test_data.to_csv(Config["normal_config"]["test_path"], index=False)
 print("finish test")
+data.to_csv(Config["normal_config"]["val_path"], index=False)
+
 
 

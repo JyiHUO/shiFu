@@ -34,28 +34,14 @@ class Engine(object):
         finish = batch[:, -2]
         like = batch[:, -1]
         if Config["normal_config"]['use_cuda'] is True:
-            # uid = uid.cuda()
-            # user_city = user_city.cuda()
-            # item_id = item_id.cuda()
-            # author_id = author_id.cuda()
-            # item_city = item_city.cuda()
-            # channel = channel.cuda()
-            # music_id = music_id.cuda()
-            # device = device.cuda()
             X = X.cuda()
             finish = finish.cuda()
             like = like.cuda()
         finish = finish.float()
         like = like.float()
 
-        # print("X: ", X)
-        # print("finish: ", finish)
-        # print("like: ", like)
-
         # clear gradient history
         self.opt.zero_grad()
-        # finish_pred, like_pred = self.model(uid, user_city, item_id, author_id,
-        #                                     item_city, channel, music_id, device)
 
         finish_pred, like_pred = self.model(X)
 
@@ -94,7 +80,7 @@ class Engine(object):
         loss.backward()
         self.opt.step()
 
-        return loss.cpu().detach().numpy(), finish_loss, like_loss, finish_auc, like_auc
+        return loss.cpu().detach().numpy(), finish_loss.cpu().detach().numpy(), like_loss.cpu().detach().numpy(), finish_auc, like_auc
 
     def train_an_epoch(self, train_loader, epoch_id):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
@@ -159,7 +145,6 @@ class Engine(object):
         total_like_loss = np.mean(total_like_loss)
         total_finish_auc = cal_auc(finish_list, finish_pred_list)
         total_like_auc = cal_auc(like_list, like_pred_list)
-
         print('[**Evluating whole Epoch** {}] loss = {:.4f}, finish_loss = {:.4f}, like_loss = {:.4f}, finish_auc = {:.4f}, like_auc = {:.4f}'.format(
             epoch_id, total_loss, total_finish_loss, total_like_loss, total_finish_auc, total_like_auc))
 
@@ -174,5 +159,5 @@ class Engine(object):
         model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"], auc, epoch_id)
         save_checkpoint(self.model, model_dir)
 
-    def predict(self):
+    def predict(self, batch):
         pass
