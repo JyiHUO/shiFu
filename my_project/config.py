@@ -14,7 +14,7 @@ if track == "track2":
         "num_workers": 8,
         'pretrain': False,
         'pretrain_model_dir': '../../../checkpoints/',
-        'model_dir': '../../checkpoints/{}_finish_auc_{}_like_auc_{}_Epoch{}.model',
+        'model_dir': '../../cache/track2/checkpoints/{}_finish_auc_{}_like_auc_{}_Epoch{}.model',
         "model_log_dir": "../../cache/track2/runs/",
         "train_path": "../../cache/track2/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
         "val_path": "../../cache/track2/tmp/val.csv",
@@ -78,7 +78,7 @@ else:
         'device_id': 0,
         'pretrain': False,
         'pretrain_model_dir': '',
-        'model_dir': '../../checkpoints/{}_auc_{}_Epoch{}.model',
+        'model_dir': '../../cache/checkpoints/{}_auc_{}_Epoch{}.model',
         "train_path": "../../cache/track1/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
         "val_path": "../../cache/track1/tmp/val.csv",
         "test_path": "../../cache/track1/tmp/test.csv",
