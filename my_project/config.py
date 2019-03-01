@@ -9,7 +9,7 @@ if track == "track2":
     normal_config = {
         "model_name": "DTFM",
         "large_file": False,
-        'use_cuda': True,
+        'use_cuda': False,
         'device_id': 0,
         "num_workers": 8,
         'pretrain': False,
@@ -74,7 +74,7 @@ if track == "track2":
 
             "TF":{
                     "input_dim": 100,
-                    "num_layers": 3,
+                    "num_layers": 1,
                     "head_num_list": [10, 5, 2, 1],
                     "head_num_list_length": 4,
                     "forward_dim": 200
@@ -84,7 +84,7 @@ if track == "track2":
 
     training_config = {
         'num_epoch': 100,
-        'batch_size': 2**13,
+        'batch_size': 64,
         'optimizer': 'adam',
         'adam_lr': 0.001,
         'l2_regularization': 0.0000001

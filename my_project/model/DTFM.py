@@ -198,3 +198,5 @@ class TF(nn.Module):
             x_list = z_list
         batch_size = x.size()[0]
         output = t.sum(t.cat(x_list, 2), 1).contiguous().view(batch_size, 1, -1) # batch *
+
+        return output
