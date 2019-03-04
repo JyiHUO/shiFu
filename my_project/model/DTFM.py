@@ -27,7 +27,7 @@ class DTFM(nn.Module):
         self.dnn = DNN(config["DNN"])
         self.tf = TF(config["TF"])
         dim = config["CIN"]["m"] * config["CIN"]["D"] + config["CIN"]["k"] * config["CIN"]["H"] + \
-                config["DNN"]["out_dim_list"][-1] + config["CIN"]["D"] * config["TF"]["head_num_list_length"]
+                config["DNN"]["out_dim_list"][-1] + config["CIN"]["D"] * config["TF"]["head_num_list_length"] * config["CIN"]["m"]
         self.lin = nn.Linear(dim, 2)
         
     def forward(self, x):
@@ -69,7 +69,7 @@ class DTFM(nn.Module):
         # Output for TF
         x_34 = self.tf(x_24) # batch * 1 * (head_list_length*D)
         
-        x_cat = t.cat([x_21, x_32, x_33, x_34], 2) # batch * 1 * (m*D + H*k + outdim + head_list_length*D)
+        x_cat = t.cat([x_21, x_32, x_33, x_34], 2) # batch * 1 * (m*D + H*k + outdim + head_list_length*D*m)
         y = t.sigmoid(self.lin(x_cat)).squeeze(1)
         
         return y[:, 0], y[:, 1]
@@ -197,6 +197,6 @@ class TF(nn.Module):
                 z_list.append(z)
             x_list = z_list
         batch_size = x.size()[0]
-        output = t.sum(t.cat(x_list, 2), 1).contiguous().view(batch_size, 1, -1) # batch *
+        output = t.cat(x_list, 2).contiguous().view(batch_size, 1, -1) # batch * 1 * (m*D*head_list_length)
 
         return output
