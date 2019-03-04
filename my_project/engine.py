@@ -123,7 +123,7 @@ class Engine(object):
             loss, finish_loss, like_loss, \
             finish_auc, like_auc = self.batch_forward(batch)
 
-            print('[Training Epoch {}] Batch {}, Loss {}, finish_loss {}, like_loss {}, finish_auc {}, like_auc {}'.format(
+            print('[Evaluating Epoch {}] Batch {}, Loss {}, finish_loss {}, like_loss {}, finish_auc {}, like_auc {}'.format(
                     epoch_id, batch_id, loss, finish_loss, like_loss, finish_auc, like_auc))
 
             total_loss.append(loss.cpu().detach().numpy())
