@@ -21,7 +21,7 @@ shiFu/ # 我们的github1项目
 data/
     track1/ # 第一个赛道的数据，大约40G
 		... # 各种csv(原始数据)
-	track2/ # 第二个赛道的数据，大概5G
+    track2/ # 第二个赛道的数据，大概5G
 		...
 cache/
     track1/

@@ -16,7 +16,7 @@ if compute == "cpu":
             "num_workers": 8,
             'pretrain': False,
             'pretrain_model_dir': '../../../checkpoints/',
-            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_Epoch{}.model',
+            'model_dir': '../../cache/track2/checkpoints/{}_finish_auc_{}_like_auc_{}_Epoch{}.model',
             "model_log_dir": "../../cache/track2/runs/",
             "train_path": "../../cache/track2/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
             "val_path": "../../cache/track2/tmp/val.csv",
@@ -33,14 +33,14 @@ if compute == "cpu":
             'xDeepFM_config': {
                 "CIN": {
                     "k": 5,
-                    "m": 9,
+                    "m": 8,
                     "D": 100,
                     "H": 20
                 },
 
                 "DNN": {
                     "num_layers": 3,
-                    "in_dim": 9 * 100,
+                    "in_dim": 8 * 100,
                     "out_dim_list": [200, 100, 100]
                 }
             },
@@ -101,7 +101,6 @@ if compute == "cpu":
             'channel': 5,
             'music_id': 89779,
             'device': 75085,
-            "duration_time": 641
         })
 
         Config["normal_config"] = normal_config
@@ -164,17 +163,17 @@ if compute == "cpu":
 else:
     if track == "track2":
         normal_config = {
-            "model_name": "xDeepFm",
+            "model_name": "DTFM",
             "large_file": False,
             'use_cuda': True,
             'device_id': 0,
             "num_workers": 8,
             'pretrain': False,
             'pretrain_model_dir': '../../../checkpoints/',
-            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_Epoch{}.model',
+            'model_dir': '../../cache/track2/checkpoints/{}_finish_auc_{}_like_auc_{}_Epoch{}.model',
             "model_log_dir": "../../cache/track2/runs/",
             "train_path": "../../cache/track2/tmp/train.csv",
-            # or ../../data/track2/final_track2_train.txt # train + val
+        # or ../../data/track2/final_track2_train.txt # train + val
             "val_path": "../../cache/track2/tmp/val.csv",
             "test_path": "../../cache/track2/tmp/test.csv",
             "all_data_path": "../../cache/track2/tmp/all_data.csv",
@@ -189,14 +188,14 @@ else:
             'xDeepFM_config': {
                 "CIN": {
                     "k": 5,
-                    "m": 9,
+                    "m": 8,
                     "D": 100,
                     "H": 20
                 },
 
                 "DNN": {
                     "num_layers": 3,
-                    "in_dim": 9 * 100,
+                    "in_dim": 8 * 100,
                     "out_dim_list": [200, 100, 100]
                 }
             },
@@ -257,7 +256,6 @@ else:
             'channel': 5,
             'music_id': 89779,
             'device': 75085,
-            "duration_time": 641
         })
 
         Config["normal_config"] = normal_config
@@ -274,7 +272,7 @@ else:
             'pretrain_model_dir': '',
             'model_dir': '../../cache/checkpoints/{}_auc_{}_Epoch{}.model',
             "train_path": "../../cache/track1/tmp/train.csv",
-            # or ../../data/track2/final_track2_train.txt # train + val
+        # or ../../data/track2/final_track2_train.txt # train + val
             "val_path": "../../cache/track1/tmp/val.csv",
             "test_path": "../../cache/track1/tmp/test.csv",
             'hd5_train_path': "../../cache/track1/tmp/hd5_train.hd5",
@@ -307,7 +305,7 @@ else:
         }
 
         training_config = {
-            'num_epoch': 10,
+            'num_epoch': 100,
             'batch_size': 1024,
             'optimizer': 'adam',
             'adam_lr': 1e-2,

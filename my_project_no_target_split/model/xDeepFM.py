@@ -30,7 +30,7 @@ class xDeepFM(nn.Module, BaseModel):
         dim = model_config["CIN"]["m"] * model_config["CIN"]["D"] +\
               model_config["CIN"]["k"] * model_config["CIN"]["H"] +\
               model_config["DNN"]["out_dim_list"][-1]
-        self.lin = nn.Linear(dim, 4)
+        self.lin = nn.Linear(dim, 2)
         
     def forward(self, x):
         """
@@ -68,7 +68,7 @@ class xDeepFM(nn.Module, BaseModel):
         x_cat = t.cat([x_21, x_32, x_33], 2) # batch * 1 * (m*D + H*k + outdim)
         y = t.sigmoid(self.lin(x_cat)).squeeze(1)
 
-        return y
+        return y[:, 0], y[:, 1]
 
     def init_weight(self):
         pass

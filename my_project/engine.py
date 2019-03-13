@@ -14,7 +14,7 @@ class Engine(object):
         self._writer = SummaryWriter(log_dir=Config["normal_config"]["model_log_dir"])  # tensorboard writer
         # self._writer.add_text('config', str(config), 0)
         self.opt = use_optimizer(self.model)
-        self.crit = nn.BCELoss()
+        self.crit = nn.CrossEntropyLoss()
 
     def batch_forward(self, batch):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
@@ -22,44 +22,27 @@ class Engine(object):
         # [0, 1, 2, 3, 4, 5, 8, 9, 6, 7]
         # "user_id"0, "user_city"1, "item_id"2, "author_id"3, "item_city"4,
         # "channel"5, "finish"6, "like"7, "music_id"8, "device"9
-
-        # uid = batch[0]
-        # user_city = batch[1]
-        # item_id = batch[2]
-        # author_id = batch[3]
-        # item_city = batch[4]
-        # channel = batch[5]
-        # music_id = batch[8]
-        # device = batch[9]
-        X = batch[:, :8]
-        finish = batch[:, -2]
-        like = batch[:, -1]
+        X = batch[:, :9]
+        label = [batch[:, 6], batch[:, 7]]   # finish like
+        target = batch[:, -1].squeeze()
         if Config["normal_config"]['use_cuda'] is True:
             X = X.cuda()
-            finish = finish.cuda()
-            like = like.cuda()
-        finish = finish.float()
-        like = like.float()
+            target = target.cuda()
 
-        finish_pred, like_pred = self.model(X)
+        pred = self.model(X)  # "fl_00 12", "fl_01 13", "fl_11 14", "fl_10 15"
 
-        # print(finish_pred.size())
-        # print(like_pred.size())
-        # print(finish.size())
-        # print(like.size())
         # cal loss
-        finish_loss = self.crit(finish_pred, finish)
-        like_loss = self.crit(like_pred, like)
-        loss = 0.7 * finish_loss + 0.3 * like_loss
+        loss = self.crit(pred, target)
 
         # cal auc
-        # finish_auc
-        finish_auc = cal_auc(finish.cpu().detach().numpy(), finish_pred.cpu().detach().numpy())
+        pred_list = []
+        pred_list.append(pred[:, 2] + pred[:, 3])
+        pred_list.append(pred[:, 1] + pred[:, 2])
+        auc = []
+        for i in range(len(pred_list)):
+            auc.append(cal_auc(label[i].cpu().detach().numpy(), pred_list[i].cpu().detach().numpy()))
 
-        # like_auc
-        like_auc = cal_auc(like.cpu().detach().numpy(), like_pred.cpu().detach().numpy())
-
-        return finish, finish_pred, like, like_pred, loss, finish_loss, like_loss, finish_auc, like_auc
+        return label, pred, loss, auc
 
     def train_single_batch(self, batch):
         '''
@@ -72,95 +55,84 @@ class Engine(object):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
         # clear gradient history
         self.opt.zero_grad()
-        finish, finish_pred, like, like_pred,\
-        loss, finish_loss, like_loss, \
-        finish_auc, like_auc = self.batch_forward(batch)
+        target, pred, loss, auc = self.batch_forward(batch)
 
         # gradient update
         loss.backward()
         self.opt.step()
 
-        return loss.cpu().detach().numpy(), finish_loss.cpu().detach().numpy(), like_loss.cpu().detach().numpy(), finish_auc, like_auc
+        return loss.cpu().detach().numpy(), auc
 
     def train_an_epoch(self, train_loader, epoch_id):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
         self.model.train()
         total_loss = []
-        total_finish_loss = []
-        total_like_loss = []
-        avg_finish_auc = []
-        avg_like_auc = []
+        total_auc = []
         for batch_id, batch in enumerate(train_loader):
+            # batch = torch.LongTensor(batch)
             assert isinstance(batch[0], torch.LongTensor)
-            loss, finish_loss, like_loss, finish_auc, like_auc = self.train_single_batch(batch)
-            print('[Training Epoch {}] Batch {}, Loss {}, finish_loss {}, like_loss {}, finish_auc {}, like_auc {}'.format(
-                epoch_id, batch_id, loss, finish_loss, like_loss, finish_auc, like_auc))
+            loss, auc = self.train_single_batch(batch)
+            print("Training epoch_id: ", epoch_id, " batch_id: ", batch_id, " loss: ", loss, " auc: ", auc)
             total_loss.append(loss)
-            total_finish_loss.append(finish_loss)
-            total_like_loss.append(like_loss)
-            avg_finish_auc.append(finish_auc)
-            avg_like_auc.append(like_auc)
+            if batch_id == 0:
+                total_auc = [[] for i in auc]
+            for i in range(len(auc)):
+                total_auc[i].append(auc[i])
+
         self._writer.add_scalar('train_performance/total_loss', np.mean(total_loss), epoch_id)
-        self._writer.add_scalar('train_performance/total_finish_loss', np.mean(total_finish_loss), epoch_id)
-        self._writer.add_scalar('train_performance/total_like_loss', np.mean(total_like_loss), epoch_id)
-        self._writer.add_scalar('train_performance/finish_auc', np.mean(avg_finish_auc), epoch_id)
-        self._writer.add_scalar('train_performance/like_auc', np.mean(avg_like_auc), epoch_id)
+        self._writer.add_scalar('train_performance/finish_auc', np.mean(total_auc[0]), epoch_id)
+        self._writer.add_scalar('train_performance/like_auc', np.mean(total_auc[1]), epoch_id)
 
     def evaluate(self, evaluate_data, epoch_id):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
         self.model.eval()
         total_loss = []
-        total_finish_loss = []
-        total_like_loss = []
-        finish_pred_list = []
-        finish_list = []
-        like_pred_list = []
-        like_list = []
+        total_auc = []
+        total_pred = []
+        total_target = []
 
         for batch_id, batch in enumerate(evaluate_data):
             assert isinstance(batch[0], torch.LongTensor)
-            finish, finish_pred, like, like_pred, \
-            loss, finish_loss, like_loss, \
-            finish_auc, like_auc = self.batch_forward(batch)
+            target, pred, loss, auc = self.batch_forward(batch)
 
-            print('[Evaluating Epoch {}] Batch {}, Loss {}, finish_loss {}, like_loss {}, finish_auc {}, like_auc {}'.format(
-                    epoch_id, batch_id, loss, finish_loss, like_loss, finish_auc, like_auc))
-
+            print("Evaluating epoch_id: ", epoch_id, " batch_id: ", batch_id, " loss: ", loss, " auc: ", auc)
             total_loss.append(loss.cpu().detach().numpy())
-            total_finish_loss.append(finish_loss.cpu().detach().numpy())
-            total_like_loss.append(like_loss.cpu().detach().numpy())
-            finish_pred_list.append(finish_pred.cpu().detach().numpy())
-            finish_list.append(finish.cpu().detach().numpy())
-            like_pred_list.append(like_pred.cpu().detach().numpy())
-            like_list.append(like.cpu().detach().numpy())
+            if batch_id == 0:
+                total_auc = [[] for i in auc]
+                total_pred = [[] for i in auc]
+                total_target = [[] for i in auc]
 
-        finish_list = np.concatenate(finish_list)
-        finish_pred_list = np.concatenate(finish_pred_list)
-        like_list = np.concatenate(like_list)
-        like_pred_list = np.concatenate(like_pred_list)
+            for i in range(len(auc)):
+                total_pred[i].append(pred[i].cpu().detach().numpy())
+                total_target[i].append(target[i].cpu().detach().numpy())
+
+        for i in range(len(total_auc)):
+            total_pred[i] = np.concatenate(total_pred[i])
+            total_target[i] = np.concatenate(total_target[i])
 
         # auc and loss
         total_loss = np.mean(total_loss)
-        total_finish_loss = np.mean(total_finish_loss)
-        total_like_loss = np.mean(total_like_loss)
-        total_finish_auc = cal_auc(finish_list, finish_pred_list)
-        total_like_auc = cal_auc(like_list, like_pred_list)
-        print('[**Evluating whole Epoch** {}] loss = {:.4f}, finish_loss = {:.4f}, like_loss = {:.4f}, finish_auc = {:.4f}, like_auc = {:.4f}'.format(
-            epoch_id, total_loss, total_finish_loss, total_like_loss, total_finish_auc, total_like_auc))
+        for i in range(len(total_auc)):
+            total_auc[i].append(cal_auc(total_target[i], total_pred[i]))
+        print("[**Evluating whole Epoch** ]: loss = ", total_loss, " auc = ", total_auc)
 
         self._writer.add_scalar('test_performance/total_loss', total_loss, epoch_id)
-        self._writer.add_scalar('test_performance/total_finish_loss', total_finish_loss, epoch_id)
-        self._writer.add_scalar('test_performance/total_like_loss', total_like_loss, epoch_id)
-        self._writer.add_scalar('test_performance/finish_auc', total_finish_auc, epoch_id)
-        self._writer.add_scalar('test_performance/like_auc', total_like_auc, epoch_id)
-        return total_finish_auc, total_like_auc
+        self._writer.add_scalar('test_performance/finish_auc', np.mean(total_auc[0]), epoch_id)
+        self._writer.add_scalar('test_performance/like_auc', np.mean(total_auc[1]), epoch_id)
+
+        return "_".join(total_auc)
 
     def save(self, epoch_id, auc):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
-        model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"], auc[0], auc[1], epoch_id)
+        model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"], auc, epoch_id)
         save_checkpoint(self.model, model_dir)
 
     def predict(self, test_data):
+        '''
+        may need some modify
+        :param test_data:
+        :return:
+        '''
         assert hasattr(self, 'model'), 'Please specify the exact model !'
         self.model.eval()
         uid = []

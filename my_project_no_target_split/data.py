@@ -36,12 +36,12 @@ class my_dataset(Dataset):
         else:
             '''
             columns = [
-            "uid" 0, "user_city" 1, "item_id" 2, "author_id" 3, "item_city" 4,
-            "channel" 5, "finish" 6, "like" 7, "music_id" 8, "device" 9,
-            "create_time 10", "duration_time 11", "fl_00 12", "fl_01 13", "fl_11 14", "fl_10 15", "target 16"
+            "uid", "user_city", "item_id", "author_id", "item_city",
+            "channel", "finish", "like", "music_id", "device",
+            "create_time", "duration_time"
             ]
             '''
-            return self.data[index][[0, 1, 2, 3, 4, 5, 8, 9, 11, 6, 7, 16]]  # finish and like is in the end
+            return self.data[index][[0, 1, 2, 3, 4, 5, 8, 9, 6, 7]]  # finish and like is in the end
 
     def __len__(self):
         if Config["normal_config"]["large_file"]:
