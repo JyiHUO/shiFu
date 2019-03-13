@@ -32,6 +32,9 @@ class Engine(object):
         pred = self.model(X)  # "fl_00 12", "fl_01 13", "fl_11 14", "fl_10 15"
 
         # cal loss
+        print(target)
+        print(label)
+        print(pred)
         loss = self.crit(pred, target)
 
         # cal auc

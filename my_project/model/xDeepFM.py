@@ -66,7 +66,7 @@ class xDeepFM(nn.Module, BaseModel):
         x_33 = self.dnn(x_23) # batch * 1 * outdim=100
         
         x_cat = t.cat([x_21, x_32, x_33], 2) # batch * 1 * (m*D + H*k + outdim)
-        y = t.sigmoid(self.lin(x_cat)).squeeze(1)
+        y = t.softmax(self.lin(x_cat), dim=2).squeeze(1)
 
         return y
 
