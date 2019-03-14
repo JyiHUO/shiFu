@@ -14,7 +14,7 @@ class Engine(object):
         self._writer = SummaryWriter(log_dir=Config["normal_config"]["model_log_dir"])  # tensorboard writer
         # self._writer.add_text('config', str(config), 0)
         self.opt = use_optimizer(self.model)
-        self.crit = nn.CrossEntropyLoss()
+        self.crit = nn.BCELoss()
 
     def batch_forward(self, batch):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
@@ -22,30 +22,24 @@ class Engine(object):
         # [0, 1, 2, 3, 4, 5, 8, 9, 6, 7]
         # "user_id"0, "user_city"1, "item_id"2, "author_id"3, "item_city"4,
         # "channel"5, "finish"6, "like"7, "music_id"8, "device"9
+
         X = batch[:, :9]
-        label = [batch[:, -3], batch[:, -2]]   # finish like
-        target = batch[:, -1].squeeze()
+        target = batch[:, -1]
         if Config["normal_config"]['use_cuda'] is True:
             X = X.cuda()
             target = target.cuda()
+        target = target.float()
 
-        pred = self.model(X)  # "fl_00 12", "fl_01 13", "fl_11 14", "fl_10 15"
+        pred = self.model(X)
 
         # cal loss
-        # print(target)
-        # print(label)
-        # print(pred)
         loss = self.crit(pred, target)
 
         # cal auc
-        pred_list = []
-        pred_list.append(pred[:, 2] + pred[:, 3])  # finish
-        pred_list.append(pred[:, 1] + pred[:, 2])  # like
-        auc = []
-        for i in range(len(pred_list)):
-            auc.append(cal_auc(label[i].cpu().detach().numpy(), pred_list[i].cpu().detach().numpy()))
+        # finish_auc
+        auc = cal_auc(target.cpu().detach().numpy(), pred.cpu().detach().numpy())
 
-        return label, pred, loss, auc
+        return target, pred, loss, auc
 
     def train_single_batch(self, batch):
         '''
@@ -70,72 +64,56 @@ class Engine(object):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
         self.model.train()
         total_loss = []
-        total_auc = []
+        avg_auc = []
+
         for batch_id, batch in enumerate(train_loader):
-            # batch = torch.LongTensor(batch)
             assert isinstance(batch[0], torch.LongTensor)
             loss, auc = self.train_single_batch(batch)
-            print("Training epoch_id: ", epoch_id, " batch_id: ", batch_id, " loss: ", loss, " auc: ", auc)
+            print('[Training Epoch {}] Batch {}, Loss {}, task {}, auc {}'.format(
+                epoch_id, batch_id, loss, Config["normal_config"]["task"], auc))
             total_loss.append(loss)
-            if batch_id == 0:
-                total_auc = [[] for i in auc]
-            for i in range(len(auc)):
-                total_auc[i].append(auc[i])
-
+            avg_auc.append(auc)
         self._writer.add_scalar('train_performance/total_loss', np.mean(total_loss), epoch_id)
-        self._writer.add_scalar('train_performance/finish_auc', np.mean(total_auc[0]), epoch_id)
-        self._writer.add_scalar('train_performance/like_auc', np.mean(total_auc[1]), epoch_id)
+        self._writer.add_scalar('train_performance/avg_auc', np.mean(avg_auc), epoch_id)
 
     def evaluate(self, evaluate_data, epoch_id):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
         self.model.eval()
         total_loss = []
-        total_auc = []
-        total_pred = []
-        total_target = []
+        pred_list = []
+        target_list = []
 
         for batch_id, batch in enumerate(evaluate_data):
             assert isinstance(batch[0], torch.LongTensor)
             target, pred, loss, auc = self.batch_forward(batch)
 
-            print("Evaluating epoch_id: ", epoch_id, " batch_id: ", batch_id, " loss: ", loss, " auc: ", auc)
+            print('[Evaluating Epoch {}] Batch {}, Loss {}, task {}, auc {}'.format(
+                epoch_id, batch_id, loss, Config["normal_config"]["task"], auc))
+
             total_loss.append(loss.cpu().detach().numpy())
-            if batch_id == 0:
-                total_auc = [[] for i in auc]
-                total_pred = [[] for i in auc]
-                total_target = [[] for i in auc]
+            pred_list.append(pred.cpu().detach().numpy())
+            target_list.append(target.cpu().detach().numpy())
 
-            for i in range(len(auc)):
-                total_pred[i].append(pred[i].cpu().detach().numpy())
-                total_target[i].append(target[i].cpu().detach().numpy())
-
-        for i in range(len(total_auc)):
-            total_pred[i] = np.concatenate(total_pred[i])
-            total_target[i] = np.concatenate(total_target[i])
+        target_list = np.concatenate(target_list)
+        pred_list = np.concatenate(pred_list)
 
         # auc and loss
         total_loss = np.mean(total_loss)
-        for i in range(len(total_auc)):
-            total_auc[i].append(cal_auc(total_target[i], total_pred[i]))
-        print("[**Evluating whole Epoch** ]: loss = ", total_loss, " auc = ", total_auc)
+        total_auc = cal_auc(target_list, pred_list)
+        print('[Evaluating Epoch {}] Loss {}, task {}, auc {}'.format(
+            epoch_id, total_loss, Config["normal_config"]["task"], total_auc))
 
         self._writer.add_scalar('test_performance/total_loss', total_loss, epoch_id)
-        self._writer.add_scalar('test_performance/finish_auc', np.mean(total_auc[0]), epoch_id)
-        self._writer.add_scalar('test_performance/like_auc', np.mean(total_auc[1]), epoch_id)
-
-        return "_".join(total_auc)
+        self._writer.add_scalar('test_performance/total_auc', total_auc, epoch_id)
+        return total_auc
 
     def save(self, epoch_id, auc):
         assert hasattr(self, 'model'), 'Please specify the exact model !'
-        model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"], auc, epoch_id)
+        model_dir = Config["normal_config"]['model_dir'].format(Config["normal_config"]["model_name"]+"_"+Config["normal_config"]["task"],
+                                                                auc, epoch_id)
         save_checkpoint(self.model, model_dir)
 
     def predict(self, test_data):
-        '''
-        may need some modify
-        :param test_data:
-        :return:
-        '''
         assert hasattr(self, 'model'), 'Please specify the exact model !'
         self.model.eval()
         uid = []
