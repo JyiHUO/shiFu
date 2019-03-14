@@ -5,17 +5,26 @@ from model.xDeepFM import xDeepFM
 import fire
 
 
-def model_predict(path):
+def model_predict(path_finish, path_like):
     Config["normal_config"]["pretrain"] = True
-    Config["normal_config"]["pretrain_model_dir"] = path
-    engine = ModelEngine(config=Config, model=xDeepFM)
+    Config["normal_config"]["pretrain_model_dir"] = path_finish
+    engine_finish = ModelEngine(config=Config, model=xDeepFM)
+
     sample_generator = SampleGenerator()
 
     print()
-    print("------------start testing--------------")
+    print("------------start testing finish--------------")
     test_loader = sample_generator.instance_a_loader(t="test")
-    engine.predict(test_loader)
-    print("------------finish testing")
+    df_finish = engine_finish.predict(test_loader)
+    print("------------finish testing -------------------")
+    print("------------start testing like ----------------")
+    Config["normal_config"]["pretrain_model_dir"] = path_like
+    engine_like = ModelEngine(config=Config, model=xDeepFM)
+    df_like = engine_like.predict(test_loader)
+
+    df_finish["like_probability"] = df_like["pred_probability"]
+    df_finish.columns = ["uid", "item_id","finish_probability", "like_probability"]
+    df_finish.to_csv(Config["normal_config"]["predict_file"], index=None, float_format="%.6f")
 
 
 fire.Fire(model_predict)

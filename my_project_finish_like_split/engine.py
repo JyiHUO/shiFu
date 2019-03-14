@@ -118,27 +118,22 @@ class Engine(object):
         self.model.eval()
         uid = []
         item_id = []
-        finish_pred_list = []
-        like_pred_list = []
+        pred_list = []
 
         for batch_id, batch in enumerate(test_data):
             assert isinstance(batch[0], torch.LongTensor)
-            finish, finish_pred, like, like_pred, \
-            loss, finish_loss, like_loss, \
-            finish_auc, like_auc = self.batch_forward(batch)
+            target, pred, loss, auc = self.batch_forward(batch)
 
             uid.append(batch[:, 0].cpu().detach().numpy())
             item_id.append(batch[:, 2].cpu().detach().numpy())
-            finish_pred_list.append(finish_pred.cpu().detach().numpy())
-            like_pred_list.append(like_pred.cpu().detach().numpy())
+            pred_list.append(pred.cpu().detach().numpy())
 
         uid = np.concatenate(uid).astype(int)
         item_id = np.concatenate(item_id).astype(int)
-        finish_probability = np.concatenate(finish_pred_list)
-        like_probability = np.concatenate(like_pred_list)
+        pred_probability = np.concatenate(pred_list)
 
         data = np.concatenate([uid[:, None], item_id[:, None],
-                               finish_probability[:, None], like_probability[:, None]], 1)
-        df = pd.DataFrame(data, columns=["uid", "item_id",
-                                         "finish_probability", "like_probability"])
-        df.to_csv(Config["normal_config"]["predict_file"], index=None, float_format="%.6f")
+                               pred_probability[:, None]], 1)
+        df = pd.DataFrame(data, columns=["uid", "item_id","pred_probability"])
+        # df.to_csv(Config["normal_config"]["predict_file"], index=None, float_format="%.6f")
+        return df
