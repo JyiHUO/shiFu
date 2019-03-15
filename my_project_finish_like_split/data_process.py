@@ -57,6 +57,8 @@ data["fl_10"][(data.finish == 1)&(data.like == 0)] = 3
 
 data["target"] = data["fl_00"] + data["fl_01"] + data["fl_11"] + data["fl_10"]
 
+# add title data
+
 
 # split
 train_size = int(data.shape[0] * (1 - 0.2))

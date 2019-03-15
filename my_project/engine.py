@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from tensorboardX import SummaryWriter
 
-from utils import save_checkpoint, use_optimizer
+from utils import save_checkpoint, use_optimizer, FocalLoss
 import numpy as np
 from utils import cal_auc
 from config import Config
@@ -14,7 +14,7 @@ class Engine(object):
         self._writer = SummaryWriter(log_dir=Config["normal_config"]["model_log_dir"])  # tensorboard writer
         # self._writer.add_text('config', str(config), 0)
         self.opt = use_optimizer(self.model)
-        self.crit = nn.CrossEntropyLoss()
+        self.crit = FocalLoss(class_num=4, alpha=torch.DoubleTensor([1, 70, 70, 1]).float()) # nn.CrossEntropyLoss()
 
     def batch_forward(self, batch):
         assert hasattr(self, 'model'), 'Please specify the exact model !'

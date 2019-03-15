@@ -132,8 +132,7 @@ class Engine(object):
         item_id = np.concatenate(item_id).astype(int)
         pred_probability = np.concatenate(pred_list)
 
-        data = np.concatenate([uid[:, None], item_id[:, None],
-                               pred_probability[:, None]], 1)
+        data = np.concatenate([uid[:, None], item_id[:, None], pred_probability[:, None]], 1)
         df = pd.DataFrame(data, columns=["uid", "item_id","pred_probability"])
         # df.to_csv(Config["normal_config"]["predict_file"], index=None, float_format="%.6f")
         return df
