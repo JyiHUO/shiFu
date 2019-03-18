@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../export/check_extract_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/check_extract_data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/data_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/data_process.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/engine.py" afterDir="false" />
-    </list>
+    <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,8 +79,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="78" column="18" lean-forward="true" selection-start-line="78" selection-start-column="18" selection-end-line="78" selection-end-column="18" />
+            <state relative-caret-position="240">
+              <caret line="48" column="36" lean-forward="true" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
               <folding>
                 <element signature="e#64#76#0" expanded="true" />
               </folding>
@@ -197,7 +190,7 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="60" />
+    <option name="x" value="64" />
     <option name="y" value="23" />
     <option name="width" value="1328" />
     <option name="height" value="877" />
@@ -390,12 +383,12 @@
       <workItem from="1551838010055" duration="8000" />
       <workItem from="1551855588518" duration="1235000" />
       <workItem from="1552441196702" duration="20620000" />
-      <workItem from="1552621330375" duration="1657000" />
+      <workItem from="1552621330375" duration="2101000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="101822000" />
+    <option name="totallyTimeSpent" value="102266000" />
   </component>
   <component name="TodoView" selected-index="3">
     <todo-panel id="selected-file">
@@ -407,7 +400,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="60" y="23" width="1328" height="877" extended-state="0" />
+    <frame x="64" y="23" width="1328" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16407464" />
@@ -415,7 +408,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.42675158" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3388535" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43312103" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -620,8 +613,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="78" column="18" lean-forward="true" selection-start-line="78" selection-start-column="18" selection-end-line="78" selection-end-column="18" />
+        <state relative-caret-position="240">
+          <caret line="48" column="36" lean-forward="true" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
           <folding>
             <element signature="e#64#76#0" expanded="true" />
           </folding>

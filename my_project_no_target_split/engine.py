@@ -31,7 +31,7 @@ class Engine(object):
         # channel = batch[5]
         # music_id = batch[8]
         # device = batch[9]
-        X = batch[:, :8]
+        X = batch[:, :9]
         finish = batch[:, -2]
         like = batch[:, -1]
         if Config["normal_config"]['use_cuda'] is True:
@@ -50,7 +50,7 @@ class Engine(object):
         # cal loss
         finish_loss = self.crit(finish_pred, finish)
         like_loss = self.crit(like_pred, like)
-        loss = 0.7 * finish_loss + 0.3 * like_loss
+        loss = finish_loss + like_loss
 
         # cal auc
         # finish_auc

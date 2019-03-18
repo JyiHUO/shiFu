@@ -41,7 +41,7 @@ class my_dataset(Dataset):
             "create_time", "duration_time"
             ]
             '''
-            return self.data[index][[0, 1, 2, 3, 4, 5, 8, 9, 6, 7]]  # finish and like is in the end
+            return self.data[index][[0, 1, 2, 3, 4, 5, 8, 9, 11, 6, 7]]  # finish and like is in the end
 
     def __len__(self):
         if Config["normal_config"]["large_file"]:
