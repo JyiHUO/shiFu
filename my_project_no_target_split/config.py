@@ -195,7 +195,7 @@ else:
 
                 "DNN": {
                     "in_dim": 9 * 50,
-                    "out_dim_list": [256, 128, 64, 1]
+                    "out_dim_list": [256, 128, 64, 2]
                 }
             },
 
