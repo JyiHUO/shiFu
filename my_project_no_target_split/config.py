@@ -40,13 +40,13 @@ if compute == "cpu":
 
                 "DNN": {
                     "in_dim": 9 * 8,
-                    "out_dim_list": [256, 128, 64, 1]
+                    "out_dim_list": [256, 256, 128]
                 }
             },
 
             'MLP_config': {
-                "k": 50,
-                "layers": [200, 64, 32, 16, 2]
+                "k": 8,
+                "layers": [64, 32, 16, 2]
             },
 
             "DTFM": {
@@ -85,9 +85,9 @@ if compute == "cpu":
 
         training_config = {
             'num_epoch': 10,
-            'batch_size': 64,
+            'batch_size': 1024 * 8,
             'optimizer': 'adam',
-            'adam_lr': 0.0001,
+            'adam_lr': 0.001,
             'l2_regularization': 0.0000001
         }
 
@@ -189,19 +189,19 @@ else:
                 "CIN": {
                     "k": 2,
                     "m": 9,
-                    "D": 50,
+                    "D": 8,
                     "H": 256
                 },
 
                 "DNN": {
-                    "in_dim": 9 * 50,
-                    "out_dim_list": [256, 128, 64, 2]
+                    "in_dim": 9 * 8,
+                    "out_dim_list": [256, 256, 128]
                 }
             },
 
             'MLP_config': {
-                "k": 50,
-                "layers": [200, 64, 32, 16, 2]
+                "k": 8,
+                "layers": [64, 32, 16, 2]
             },
 
             "DTFM": {
@@ -240,7 +240,7 @@ else:
 
         training_config = {
             'num_epoch': 10,
-            'batch_size': 2**13,
+            'batch_size': 1024 * 8,
             'optimizer': 'adam',
             'adam_lr': 0.0001,
             'l2_regularization': 0.0000001

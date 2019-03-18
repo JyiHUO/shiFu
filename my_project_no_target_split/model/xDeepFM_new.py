@@ -29,7 +29,7 @@ class xDeepFM(nn.Module, BaseModel):
         # for dnn and cin embedding
         self.emb_layers1 = nn.ModuleList([nn.Embedding(data_config[key], model_config["CIN"]["D"]) for key in data_config])
         # for linear embedding
-        self.emb_layers2 = nn.ModuleList([nn.Embedding(data_config[key], 1) for key in data_config])
+        # self.emb_layers2 = nn.ModuleList([nn.Embedding(data_config[key], 1) for key in data_config])
 
         self.cin = CIN(model_config["CIN"])
         self.dnn = DNN(model_config["DNN"])
@@ -54,33 +54,35 @@ class xDeepFM(nn.Module, BaseModel):
 
         x_1 = []  # for DNN and CIN
         x_2 = []  # for Linear
-        for i, emb in enumerate(self.emb_layers2):
-            x_2.append(emb(x[:, i]))
+        # for i, emb in enumerate(self.emb_layers2):
+        #     x_2.append(emb(x[:, i]))
 
         for i, emb in enumerate(self.emb_layers1):
-            x_1.append(emb(x[:, i]).unsqueeze(1))
+            x_1.append(emb(x[:, i]))  # .unsqueeze(1)
         
         # Input for Linear
-        x_linear = self.linear(t.cat(x_2, 1)).squeeze()  # batch * 1 * (m*D)
+        # x_linear = self.linear(t.cat(x_2, 1)).squeeze(1)  # batch * 1 * (m*D)
         
         # Input for CIN 
-        x_cin_in = t.cat(x_1, 1)  # batch * m * D
+        x_cin_in = t.cat([i.unsqueeze(1) for i in x_1], 1)  # batch * m * D
         
         # Input for DNN
-        x_dnn_in = t.cat(x_1, 2)  # batch * 1 * (m*D)
+        x_dnn_in = t.cat(x_1, 1)  # batch * 1 * (m*D)
 
         # Output for CIN
-        x_cin = self.cin(x_cin_in).squeeze()  # batch * (H*k) -> batch * 1
+        x_cin = self.cin(x_cin_in).squeeze(1)  # batch * (H*k) -> batch * 1
         
         # Output for DNN finish and like
-        x = self.dnn(x_dnn_in).squeeze()  # batch * outdim=1
+        x_dnn_out = self.dnn(x_dnn_in)  # batch * outdim=1
 
-        x_finish_out = x[:, 0]  # + x_cin + x_linear  # batch * 1 * (m*D + H*k + outdim)
-        x_like_out = x[:, 1]  # + x_cin + x_linear
-        y_finish = t.sigmoid(x_finish_out)
-        y_like = t.sigmoid(x_like_out)
+        # x_finish_out = x_dnn_out[:, 0]  # + x_cin + x_linear  # batch * 1 * (m*D + H*k + outdim)
+        # x_like_out = x_dnn_out[:, 1]  # + x_cin + x_linear
+        # y_finish = t.sigmoid(x_finish_out)
+        # y_like = t.sigmoid(x_like_out)
+        x = F.sigmoid(x_cin)
 
-        return y_finish, y_like
+        return x[:, 0], x[:, 1]
+        # return y_finish, y_like
 
     def init_weight(self):
         pass
@@ -96,7 +98,7 @@ class CIN(nn.Module):
         self.H = self.conf["H"]
         self.lin = nn.Linear(self.m*self.m, self.H, bias=False)
         self.layers = nn.ModuleList([])
-        self.linear_out = nn.Linear(self.k*self.H, 1)
+        self.linear_out = nn.Linear(self.k*self.H, 2)
         for i in range(1, self.k):
             self.layers.append(nn.Linear(self.m*self.H, self.H, bias=False))
     
@@ -105,6 +107,8 @@ class CIN(nn.Module):
             Input: batch * m * D
             Output: batch * 1 *(k*H)
         """
+
+
         x_0 = x.permute(0, 2, 1).unsqueeze(2).expand([-1, self.D, self.m, self.m])
         x_0 = x_0 * x_0
         x_0 = x_0.contiguous().view((-1, self.D, self.m*self.m))
@@ -131,10 +135,13 @@ class DNN(nn.Module):
         super(DNN, self).__init__()
         self.conf = conf
         self.layers = nn.ModuleList([])
+        self.bn = nn.ModuleList([])
         start = self.conf["in_dim"]
         for i in range(len(self.conf["out_dim_list"])):
             end = self.conf["out_dim_list"][i]
             self.layers.append(nn.Linear(start, end))
+            if i != len(self.conf["out_dim_list"]) - 1:
+                self.bn.append(nn.BatchNorm1d(end))
             start = end
         
     def forward(self, x):
@@ -144,9 +151,12 @@ class DNN(nn.Module):
             output: Variable
                 size : batch * 1 * out_dim=100
         """
-        for layer in self.layers:
-            x = layer(x)
-            x = F.relu(x)
+        for i in range(len(self.layers)):
+            x = self.layers[i](x)
+            if i != len(self.layers) - 1:
+                # print(x.size())
+                x = self.bn[i](x)
+            # x = F.relu(x)
         return x
         
 

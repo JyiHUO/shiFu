@@ -1,4 +1,4 @@
-from model.xDeepFM import xDeepFM
+from model.xDeepFM_new import xDeepFM
 import torch
 from engine import Engine
 from utils import use_cuda

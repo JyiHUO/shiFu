@@ -1,4 +1,4 @@
-from model.xDeepFM import xDeepFM
+from model.xDeepFM_new import xDeepFM
 from config import Config
 import torch
 from models_engine import ModelEngine

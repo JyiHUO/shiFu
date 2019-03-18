@@ -1,7 +1,7 @@
 from data import SampleGenerator
 from config import Config
 from models_engine import ModelEngine
-from model.xDeepFM import xDeepFM
+from model.xDeepFM_new import xDeepFM
 import fire
 
 
