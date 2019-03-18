@@ -54,14 +54,14 @@ class xDeepFM(nn.Module, BaseModel):
 
         x_1 = []  # for DNN and CIN
         x_2 = []  # for Linear
-        for i, emb in enumerate(self.emb_layers2):
-            x_2.append(emb(x[:, i]))
+        # for i, emb in enumerate(self.emb_layers2):
+        #     x_2.append(emb(x[:, i]))
 
         for i, emb in enumerate(self.emb_layers1):
             x_1.append(emb(x[:, i]).unsqueeze(1))
         
         # Input for Linear
-        x_linear = self.linear(t.cat(x_2, 1)).squeeze()  # batch * 1 * (m*D)
+        # x_linear = self.linear(t.cat(x_2, 1)).squeeze()  # batch * 1 * (m*D)
         
         # Input for CIN 
         x_cin_in = t.cat(x_1, 1)  # batch * m * D
@@ -76,8 +76,8 @@ class xDeepFM(nn.Module, BaseModel):
         x_finish = self.dnn(x_dnn_in).squeeze()  # batch * outdim=1
         x_like = self.dnn(x_dnn_in).squeeze()
 
-        x_finish_out = x_finish + x_cin + x_linear  # batch * 1 * (m*D + H*k + outdim)
-        x_like_out = x_like + x_cin + x_linear
+        x_finish_out = x_finish + x_cin   # batch * 1 * (m*D + H*k + outdim)
+        x_like_out = x_like + x_cin
         y_finish = t.sigmoid(x_finish_out)
         y_like = t.sigmoid(x_like_out)
 
