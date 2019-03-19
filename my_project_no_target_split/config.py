@@ -45,7 +45,7 @@ if compute == "cpu":
             },
 
             'MLP_config': {
-                "k": 8,
+                "k": [50, 10, 50, 50, 10, 5, 25, 25, 10],  # 8,
                 "layers": [64, 32, 16, 2]
             },
 
@@ -200,8 +200,8 @@ else:
             },
 
             'MLP_config': {
-                "k": 50,
-                "layers": [256, 256, 128, 64, 32, 2]
+                "k":  50,
+                "layers": [256, 256, 128, 128, 64, 32, 2]
             },
 
             "DTFM": {
@@ -247,15 +247,15 @@ else:
         }
 
         data_config = OrderedDict({
-            'uid': 73974,
-            'user_city': 397,
-            'item_id': 4122689,
-            'author_id': 850308,
-            'item_city': 462,
-            'channel': 5,
-            'music_id': 89779,
-            'device': 75085,
-            "duration_time": 641
+            'uid': 73974,  # 50
+            'user_city': 397,  # 10
+            'item_id': 4122689,  # 50
+            'author_id': 850308,  # 50
+            'item_city': 462,  # 10
+            'channel': 5,  # 5
+            'music_id': 89779,  # 25
+            'device': 75085,  # 25
+            "duration_time": 641  # 10
         })
 
         Config["normal_config"] = normal_config
