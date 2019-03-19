@@ -85,10 +85,10 @@ if compute == "cpu":
 
         training_config = {
             'num_epoch': 10,
-            'batch_size': 1024 * 8,
+            'batch_size': 1024 * 2,
             'optimizer': 'adam',
             'adam_lr': 0.001,
-            'l2_regularization': 0.0000001
+            'l2_regularization':  0.0000001
         }
 
         data_config = OrderedDict({
@@ -200,8 +200,8 @@ else:
             },
 
             'MLP_config': {
-                "k": 8,
-                "layers": [64, 32, 16, 2]
+                "k": 50,
+                "layers": [256, 256, 128, 64, 32, 2]
             },
 
             "DTFM": {
@@ -240,9 +240,9 @@ else:
 
         training_config = {
             'num_epoch': 10,
-            'batch_size': 1024 * 8,
+            'batch_size': 1024 * 2,
             'optimizer': 'adam',
-            'adam_lr': 0.0001,
+            'adam_lr': 0.001,
             'l2_regularization': 0.0000001
         }
 

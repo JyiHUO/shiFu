@@ -21,6 +21,7 @@ class MLP(nn.Module, BaseModel):
         self.linear1 = nn.Linear(in_features=num_feature*k, out_features=layers[0])
         self.linear_layers = nn.ModuleList([nn.Linear(layers[i-1], layers[i]) for i in range(1, len(layers))])
         self.bn = nn.ModuleList([nn.BatchNorm1d(layers[i]) for i in range(1, len(layers)-1)])
+        self.dp = nn.ModuleList([nn.Dropout(p=0.4) for i in range(1, len(layers)-1)])
 
     def forward(self, x):
         first_layer = []
@@ -32,6 +33,7 @@ class MLP(nn.Module, BaseModel):
             x = self.linear_layers[i](x)
             if i != len(self.linear_layers) - 1:
                 # print(x.size())
+                x = self.dp[i](x)
                 x = self.bn[i](x)
         x = F.sigmoid(x)
         return x[:, 0], x[:, 1]
