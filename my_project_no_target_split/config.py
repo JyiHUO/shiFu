@@ -16,7 +16,7 @@ if compute == "cpu":
             "num_workers": 8,
             'pretrain': False,
             'pretrain_model_dir': '../../../checkpoints/',
-            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_Epoch{}.model',
+            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_{}_Epoch{}.model',
             "model_log_dir": "../../cache/track2/runs/",
             "train_path": "../../cache/track2/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
             "val_path": "../../cache/track2/tmp/val.csv",
@@ -80,6 +80,11 @@ if compute == "cpu":
                         "head_num_list_length": 4,
                         "forward_dim": 200
                         }
+            },
+            "DeepFM":{
+                "emb_size": 15,
+                "num_feature": 9,
+                "layers": [256, 256, 128, 128, 64, 32, 2]
             }
         }
 
@@ -170,7 +175,7 @@ else:
             "num_workers": 8,
             'pretrain': False,
             'pretrain_model_dir': '../../../checkpoints/',
-            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_Epoch{}.model',
+            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_{}_Epoch{}.model',
             "model_log_dir": "../../cache/track2/runs/",
             "train_path": "../../cache/track2/tmp/train.csv",
             # or ../../data/track2/final_track2_train.txt # train + val
@@ -200,7 +205,7 @@ else:
             },
 
             'MLP_config': {
-                "k":  50,
+                "k":  [50, 10, 50, 50, 10, 5, 25, 25, 10],  # 50
                 "layers": [256, 256, 128, 128, 64, 32, 2]
             },
 
@@ -235,6 +240,11 @@ else:
                     "head_num_list_length": 4,
                     "forward_dim": 200
                 }
+            },
+            "DeepFM": {
+                "emb_size": 50,
+                "num_feature": 9,
+                "layers": [256, 256, 128, 128, 64, 32, 2]
             }
         }
 

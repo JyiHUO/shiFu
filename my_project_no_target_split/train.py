@@ -4,8 +4,9 @@ from models_engine import ModelEngine
 from model.xDeepFM_old import xDeepFM
 from model.mlp import MLP
 from model.DTFM import DTFM
+from model.deepfm import DeepFM
 
-engine = ModelEngine(config=Config, model=MLP)
+engine = ModelEngine(config=Config, model=DeepFM)
 sample_generator = SampleGenerator()
 
 for epoch in range(Config["training_config"]['num_epoch']):
