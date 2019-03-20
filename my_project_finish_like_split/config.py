@@ -47,8 +47,8 @@ if compute == "cpu":
             },
 
             'MLP_config': {
-                "k": 50,
-                "layers": [200, 64, 32, 16, 2]
+                "k":  [50, 10, 50, 50, 10, 5, 25, 25, 10],  # 50
+                "layers": [256, 256, 128, 128, 64, 32, 1]
             },
 
             "DTFM": {
@@ -82,6 +82,11 @@ if compute == "cpu":
                         "head_num_list_length": 4,
                         "forward_dim": 200
                         }
+            },
+            "DeepFM": {
+                "emb_size": 15,
+                "num_feature": 9,
+                "layers": [256, 256, 128, 128, 64, 32, 1]
             }
         }
 
@@ -204,8 +209,8 @@ else:
             },
 
             'MLP_config': {
-                "k": 50,
-                "layers": [200, 64, 32, 16, 2]
+                "k":  [50, 10, 50, 50, 10, 5, 25, 25, 10],  # 50
+                "layers": [256, 256, 128, 128, 64, 32, 1]
             },
 
             "DTFM": {
@@ -239,6 +244,11 @@ else:
                     "head_num_list_length": 4,
                     "forward_dim": 200
                 }
+            },
+            "DeepFM": {
+                "emb_size": 15,
+                "num_feature": 9,
+                "layers": [256, 256, 128, 128, 64, 32, 1]
             }
         }
 
