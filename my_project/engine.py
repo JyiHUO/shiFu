@@ -14,7 +14,7 @@ class Engine(object):
         self._writer = SummaryWriter(log_dir=Config["normal_config"]["model_log_dir"])  # tensorboard writer
         # self._writer.add_text('config', str(config), 0)
         self.opt = use_optimizer(self.model)
-        self.crit = FocalLoss(class_num=4, alpha=torch.DoubleTensor([1, 70, 70, 1]).float()) # nn.CrossEntropyLoss()
+        self.crit = nn.NLLLoss()  # nn.CrossEntropyLoss()  # FocalLoss(class_num=4, alpha=torch.DoubleTensor([1, 70, 70, 1]).float()) # nn.CrossEntropyLoss()
 
     def batch_forward(self, batch):
         assert hasattr(self, 'model'), 'Please specify the exact model !'

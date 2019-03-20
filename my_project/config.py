@@ -16,7 +16,7 @@ if compute == "cpu":
             "num_workers": 8,
             'pretrain': False,
             'pretrain_model_dir': '../../../checkpoints/',
-            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_Epoch{}.model',
+            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_{}_Epoch{}.model',
             "model_log_dir": "../../cache/track2/runs/",
             "train_path": "../../cache/track2/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
             "val_path": "../../cache/track2/tmp/val.csv",
@@ -32,22 +32,21 @@ if compute == "cpu":
         model_config = {
             'xDeepFM_config': {
                 "CIN": {
-                    "k": 5,
+                    "k": 2,
                     "m": 9,
-                    "D": 100,
-                    "H": 20
+                    "D": 8,
+                    "H": 256
                 },
 
                 "DNN": {
-                    "num_layers": 3,
-                    "in_dim": 9 * 100,
-                    "out_dim_list": [200, 100, 100]
+                    "in_dim": 9 * 8,
+                    "out_dim_list": [256, 256, 128]
                 }
             },
 
             'MLP_config': {
-                "k": 50,
-                "layers": [200, 64, 32, 16, 2]
+                "k": [50, 10, 50, 50, 10, 5, 25, 25, 10],  # 8,
+                "layers": [64, 32, 16, 4]
             },
 
             "DTFM": {
@@ -81,15 +80,20 @@ if compute == "cpu":
                         "head_num_list_length": 4,
                         "forward_dim": 200
                         }
+            },
+            "DeepFM":{
+                "emb_size": 15,
+                "num_feature": 9,
+                "layers": [256, 256, 128, 128, 64, 32, 2]
             }
         }
 
         training_config = {
             'num_epoch': 10,
-            'batch_size': 64,
+            'batch_size': 1024 * 2,
             'optimizer': 'adam',
-            'adam_lr': 0.0001,
-            'l2_regularization': 0.0000001
+            'adam_lr': 0.001,
+            'l2_regularization':  0.0000001
         }
 
         data_config = OrderedDict({
@@ -171,7 +175,7 @@ else:
             "num_workers": 8,
             'pretrain': False,
             'pretrain_model_dir': '../../../checkpoints/',
-            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_Epoch{}.model',
+            'model_dir': '../../cache/track2/checkpoints/{}_auc:{}_{}_Epoch{}.model',
             "model_log_dir": "../../cache/track2/runs/",
             "train_path": "../../cache/track2/tmp/train.csv",
             # or ../../data/track2/final_track2_train.txt # train + val
@@ -188,22 +192,21 @@ else:
         model_config = {
             'xDeepFM_config': {
                 "CIN": {
-                    "k": 5,
+                    "k": 2,
                     "m": 9,
-                    "D": 100,
-                    "H": 20
+                    "D": 8,
+                    "H": 256
                 },
 
                 "DNN": {
-                    "num_layers": 3,
-                    "in_dim": 9 * 100,
-                    "out_dim_list": [200, 100, 100]
+                    "in_dim": 9 * 8,
+                    "out_dim_list": [256, 256, 128]
                 }
             },
 
             'MLP_config': {
-                "k": 50,
-                "layers": [200, 64, 32, 16, 2]
+                "k":  [50, 10, 50, 50, 10, 5, 25, 25, 10],  # 50
+                "layers": [256, 256, 128, 128, 64, 32, 4]
             },
 
             "DTFM": {
@@ -237,27 +240,32 @@ else:
                     "head_num_list_length": 4,
                     "forward_dim": 200
                 }
+            },
+            "DeepFM": {
+                "emb_size": 50,
+                "num_feature": 9,
+                "layers": [256, 256, 128, 128, 64, 32, 2]
             }
         }
 
         training_config = {
             'num_epoch': 10,
-            'batch_size': 2**13,
+            'batch_size': 1024 * 2,
             'optimizer': 'adam',
-            'adam_lr': 0.0001,
+            'adam_lr': 0.001,
             'l2_regularization': 0.0000001
         }
 
         data_config = OrderedDict({
-            'uid': 73974,
-            'user_city': 397,
-            'item_id': 4122689,
-            'author_id': 850308,
-            'item_city': 462,
-            'channel': 5,
-            'music_id': 89779,
-            'device': 75085,
-            "duration_time": 641
+            'uid': 73974,  # 50
+            'user_city': 397,  # 10
+            'item_id': 4122689,  # 50
+            'author_id': 850308,  # 50
+            'item_city': 462,  # 10
+            'channel': 5,  # 5
+            'music_id': 89779,  # 25
+            'device': 75085,  # 25
+            "duration_time": 641  # 10
         })
 
         Config["normal_config"] = normal_config

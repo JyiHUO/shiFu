@@ -171,7 +171,7 @@ else:
     if track == "track2":
         normal_config = {
             "task": "finish",  # or like
-            "model_name": "xDeepFm",
+            "model_name": "mlp",
             "large_file": False,
             'use_cuda': True,
             'device_id': 0,
@@ -254,9 +254,9 @@ else:
 
         training_config = {
             'num_epoch': 10,
-            'batch_size': 2**13,
+            'batch_size': 1024 * 2,
             'optimizer': 'adam',
-            'adam_lr': 0.0001,
+            'adam_lr': 0.001,
             'l2_regularization': 0.0000001
         }
 
