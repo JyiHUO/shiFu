@@ -16,11 +16,6 @@ from torch import optim
 """
    config: for the parameters, may be later load from a json file 
 """
-config = {
-        'field_size': 9,
-        'field_max_num_list': [10,300,200,50,23,44,12,67,90],
-        'emb_size': 100
-        }
 
 
 class NFFM(nn.Module):
@@ -107,9 +102,4 @@ class Interac(nn.Module):
         return y
 
 
-model = NFFM(config)    
-print(model)
-x = t.LongTensor([[1,2,3,4,5,6,7,8,9],[8,6,4,4,6,5,4,4,3]])
-y = model(x)
-print(y)
 
