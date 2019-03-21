@@ -77,15 +77,18 @@ def g_train_first_order(data):
                 print("start: "+f1+"_"+f2)
                 for label in ["finish", "like"]:
                     label_rate = train.groupby([f1, f2])[label].\
-                        mean().rename(f1+"_"+f2+"_"+label+"_rate").reset_index().drop(f2, axis=1)
+                        mean().rename(f1+"_"+f2+"_"+label+"_rate").reset_index()
                     label_sum = train.groupby([f1, f2])[label].\
-                        sum().rename(f1+"_"+f2+"_"+label+"_sum").reset_index().drop(f2, axis=1)
-                    test = test.merge(right=label_rate, how="left", left_on=f1, right_on=f1)
-                    test = test.merge(right=label_sum, how="left", left_on=f1, right_on=f1)
+                        sum().rename(f1+"_"+f2+"_"+label+"_sum").reset_index()
+                    print("start merge")
+                    test = test.merge(right=label_rate, how="left", on=[f1, f2])
+                    print(test.shape)
+                    test = test.merge(right=label_sum, how="left", on=[f1, f2])
+                    print(test.shape)
                 feature_num = train.groupby([f1, f2])[label]\
-                    .count().rename(f1+"_"+f2+"_count").reset_index().drop(f2, axis=1)
+                    .count().rename(f1+"_"+f2+"_count").reset_index()
 
-                test = test.merge(right=feature_num, how="left", left_on=f1, right_on=f1)
+                test = test.merge(right=feature_num, how="left", on=[f1, f2])
 
         new_data.append(test)
     new_data = pd.concat(new_data, 0)
@@ -115,15 +118,18 @@ def g_test_first_order_two(train, test):
             print("start: " + f1 + "_" + f2)
             for label in ["finish", "like"]:
                 label_rate = train.groupby([f1, f2])[label]. \
-                    mean().rename(f1 + "_" + f2 + "_" + label + "_rate").reset_index().drop(f2, axis=1)
+                    mean().rename(f1 + "_" + f2 + "_" + label + "_rate").reset_index()
                 label_sum = train.groupby([f1, f2])[label]. \
-                    sum().rename(f1 + "_" + f2 + "_" + label + "_sum").reset_index().drop(f2, axis=1)
-                test = test.merge(right=label_rate, how="left", left_on=f1, right_on=f1)
-                test = test.merge(right=label_sum, how="left", left_on=f1, right_on=f1)
+                    sum().rename(f1 + "_" + f2 + "_" + label + "_sum").reset_index()
+                print("start merge")
+                test = test.merge(right=label_rate, how="left", on=[f1, f2])
+                print(test.shape)
+                test = test.merge(right=label_sum, how="left", on=[f1, f2])
+                print(test.shape)
             feature_num = train.groupby([f1, f2])[label] \
-                .count().rename(f1 + "_" + f2 + "_count").reset_index().drop(f2, axis=1)
+                .count().rename(f1 + "_" + f2 + "_count").reset_index()
 
-            test = test.merge(right=feature_num, how="left", left_on=f1, right_on=f1)
+            test = test.merge(right=feature_num, how="left", on=[f1, f2])
 
     test.fillna(0, inplace=True)
     return test
@@ -140,7 +146,9 @@ def get_feature(data, test):
     test = test.copy()
 
     test = g_test_first_order_two(data, test)
+    print("finish test data")
     data = g_train_first_order(data)
+    print("finish train data")
 
     test.to_csv(Config["save_test_path"], index=False)
     data.to_csv(Config["save_all_data_path"], index=False)
