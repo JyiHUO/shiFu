@@ -176,7 +176,7 @@ else:
     if track == "track2":
         normal_config = {
             "task": "finish",  # or like
-            "model_name": "mlp",
+            "model_name": "nffm",
             "large_file": False,
             'use_cuda': True,
             'device_id': 0,

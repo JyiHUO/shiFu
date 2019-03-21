@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/model/nffm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../export/extract_feature.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/extract_feature.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_baseline.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_baseline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_no_target_split/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_no_target_split/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="253" column="23" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+            <state relative-caret-position="-3293">
+              <caret line="178" column="31" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -51,7 +50,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
+            <state relative-caret-position="990">
               <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -63,7 +62,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
+            <state relative-caret-position="418">
               <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
               <folding>
                 <element signature="e#64#76#0" expanded="true" />
@@ -84,7 +83,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
+            <state relative-caret-position="220">
               <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
               <folding>
                 <element signature="e#40#65#0" expanded="true" />
@@ -97,7 +96,7 @@
         <entry file="file://$PROJECT_DIR$/model/deepfm.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="66">
-              <caret line="3" column="27" lean-forward="true" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+              <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
               </folding>
@@ -108,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/nffm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="267">
-              <caret line="40" column="75" selection-start-line="40" selection-start-column="75" selection-end-line="40" selection-end-column="75" />
+            <state relative-caret-position="141">
+              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
               <folding>
                 <element signature="e#88#106#0" expanded="true" />
               </folding>
@@ -120,8 +119,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+            <state relative-caret-position="146">
+              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -132,7 +131,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="154">
+            <state relative-caret-position="242">
               <caret line="11" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -144,7 +143,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data_process.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
+            <state relative-caret-position="242">
               <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -220,7 +219,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -237,6 +235,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -411,11 +410,12 @@
       <workItem from="1553055216891" duration="1763000" />
       <workItem from="1553062324959" duration="612000" />
       <workItem from="1553139672303" duration="532000" />
+      <workItem from="1553176674316" duration="961000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95229000" />
+    <option name="totallyTimeSpent" value="96190000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -427,15 +427,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="81" y="23" width="1328" height="877" extended-state="0" />
+    <frame x="49" y="27" width="1328" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17573872" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17807154" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22929937" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3987261" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.43312103" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -582,7 +582,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
+        <state relative-caret-position="990">
           <caret line="45" column="17" selection-start-line="45" selection-start-column="17" selection-end-line="45" selection-end-column="17" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
@@ -592,7 +592,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
+        <state relative-caret-position="418">
           <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
           <folding>
             <element signature="e#64#76#0" expanded="true" />
@@ -609,7 +609,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="220">
           <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
           <folding>
             <element signature="e#40#65#0" expanded="true" />
@@ -617,19 +617,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://$PROJECT_DIR$/model/deepfm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="13" column="28" selection-start-line="13" selection-start-column="28" selection-end-line="13" selection-end-column="28" />
+        <state relative-caret-position="66">
+          <caret line="3" column="27" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#12#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
+        <state relative-caret-position="242">
           <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -639,7 +639,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/data_process.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
+        <state relative-caret-position="242">
           <caret line="11" column="45" selection-start-line="11" selection-start-column="45" selection-end-line="11" selection-end-column="45" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
@@ -647,30 +647,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/deepfm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="66">
-          <caret line="3" column="27" lean-forward="true" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/nffm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="267">
-          <caret line="40" column="75" selection-start-line="40" selection-start-column="75" selection-end-line="40" selection-end-column="75" />
+        <state relative-caret-position="141">
+          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="e#88#106#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="253" column="23" selection-start-line="253" selection-start-column="23" selection-end-line="253" selection-end-column="23" />
+        <state relative-caret-position="-3293">
+          <caret line="178" column="31" selection-start-line="178" selection-start-column="31" selection-end-line="178" selection-end-column="31" />
         </state>
       </provider>
     </entry>

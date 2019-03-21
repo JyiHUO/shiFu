@@ -12,9 +12,9 @@ Config = {
         "val_path": "../../cache/track2/tmp/val.csv",
         "test_path": "../../cache/track2/tmp/test.csv",
         "all_data_path": "../../cache/track2/tmp/all_data.csv",
-        'hd5_train_path': "../../cache/track2/tmp/hd5_train.hd5",
-        "hd5_val_path": "../../cache/track2/tmp/hd5_val.hd5",
         "raw_test_path": '../../data/track2/final_track2_test_no_anwser.txt',
         "raw_data_path": "../../data/track2/final_track2_train.txt",
-        "predict_file": "../../cache/track2/result/result.csv"
+        "predict_file": "../../cache/track2/result/result.csv",
+        "save_test_path": "../../cache/track2/tmp/test_lgb.csv",
+        "save_all_data_path": "../../cache/track2/tmp/all_data_lgb.csv"
     }
