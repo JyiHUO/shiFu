@@ -87,6 +87,11 @@ if compute == "cpu":
                 "emb_size": 15,
                 "num_feature": 9,
                 "layers": [256, 256, 128, 128, 64, 32, 1]
+            },
+            "NFFM": {
+                'field_size': 9,
+                'field_max_num_list': [73974, 397, 4122689, 850308, 462, 5, 89779, 75085, 641],
+                'emb_size': 2
             }
         }
 
@@ -249,6 +254,11 @@ else:
                 "emb_size": 15,
                 "num_feature": 9,
                 "layers": [256, 256, 128, 128, 64, 32, 1]
+            },
+            "NFFM": {
+                'field_size': 9,
+                'field_max_num_list': [73974, 397, 4122689, 850308, 462, 5, 89779, 75085, 641],
+                'emb_size': 20
             }
         }
 
