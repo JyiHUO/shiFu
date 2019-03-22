@@ -200,8 +200,6 @@ def train_val_split():
     val.to_csv(Config["save_test_path"], index=False)
 
 
-def face_data():
-
 
 # 生成train,test,val,all_data作为deepFM等等的输入，只有9个特征
 # g_deep()

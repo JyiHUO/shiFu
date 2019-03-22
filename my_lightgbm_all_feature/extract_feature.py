@@ -3,7 +3,7 @@ import lightgbm as lgb
 from config import Config
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import KFold
-
+import numpy as np
 '''
 user_id_num: 70711
 item_id_num:  3687156
@@ -29,7 +29,69 @@ duration_time
 4.user_id 跟 item_id组合出现次数
 5.组合正样本次数
 '''
+def g_deep():
+    columns = ["uid", "user_city", "item_id", "author_id", "item_city",
+                "channel", "finish", "like", "music_id", "device",
+                "create_time", "duration_time"]
 
+    data = pd.read_csv(Config["raw_data_path"], sep='\t', names=columns)
+    test_data = pd.read_csv(Config['raw_test_path'], sep='\t', names=columns)
+    print("finish reading")
+
+    # outline data
+    data[data["duration_time"] == 70000] = data.duration_time.median()
+    data[data["finish"] == 10] = 0
+    data[data["like"] == 10] = 0
+    data = data.astype(int)
+    test_data = test_data.astype(int)
+
+    # output field size for each feature
+    for c in data.columns:
+        max_id = max(data[c].max(), test_data[c].max())
+        min_id = min(data[c].max(), test_data[c].min())
+        print(c, ':', " min: ", min_id, " max: ", max_id+1)
+
+    # data clean
+    # user_city, item_city, music_id should plus one
+    data["user_city"] = data["user_city"] + 1
+    data["item_city"] = data["item_city"] + 1
+    data["music_id"] = data["music_id"] + 1
+    test_data["user_city"] = test_data["user_city"] + 1
+    test_data["item_city"] = test_data["item_city"] + 1
+    test_data["music_id"] = test_data["music_id"] + 1
+
+    # split target to finish_lisk: 01, 11, 10, 00
+    data["fl_00"] = 0
+    data["fl_01"] = 0
+    data["fl_11"] = 0
+    data["fl_10"] = 0
+
+    test_data["fl_00"] = 0
+    test_data["fl_01"] = 0
+    test_data["fl_11"] = 0
+    test_data["fl_10"] = 0
+
+    data["fl_00"][(data.finish == 0)&(data.like == 0)] = 0
+    data["fl_01"][(data.finish == 0)&(data.like == 1)] = 1
+    data["fl_11"][(data.finish == 1)&(data.like == 1)] = 2
+    data["fl_10"][(data.finish == 1)&(data.like == 0)] = 3
+
+    data["target"] = data["fl_00"] + data["fl_01"] + data["fl_11"] + data["fl_10"]
+
+    # add title data
+
+
+    # split
+    train_size = int(data.shape[0] * (1 - 0.2))
+    train = data.iloc[:train_size]
+    val = data.iloc[train_size:]
+    train.to_csv(Config["train_path"], index=False)
+    print("finish train")
+    val.to_csv(Config["val_path"], index=False)
+    print("finish val")
+    test_data.to_csv(Config["test_path"], index=False)
+    print("finish test")
+    data.to_csv(Config["all_data_path"], index=False)
 
 def g_train(data):
     columns = data.columns
@@ -75,6 +137,9 @@ def g_train(data):
 
                 test = test.merge(right=feature_num, how="left", on=[f1, f2])
                 print(test.head(1))
+                print("check null number")
+                print(np.sum(test.isnull())/test.shape[0])
+
 
         test.fillna(0, inplace=True)
         test.to_csv(Config["save_all_data_path"]+str(count), index=False)
@@ -115,6 +180,8 @@ def g_test_two(train, test):
 
             test = test.merge(right=feature_num, how="left", on=[f1, f2])
             print(test.head(1))
+            print("check null number")
+            print(np.sum(test.isnull()) / test.shape[0])
 
     test.fillna(0, inplace=True)
     test.to_csv(Config["save_test_path"], index=False)
@@ -146,6 +213,10 @@ def get_feature():
 
 
 def collect_train_val_split():
+    '''
+    查看样本有多大，才决定是否合并all_data的所有分片
+    :return:
+    '''
     data = pd.read_csv(Config["save_all_data_path"])
     L = data.shape[0]
     train = data[:int(0.8*L)]
@@ -154,5 +225,13 @@ def collect_train_val_split():
     val.to_csv(Config["save_test_path"], index=False)
 
 
+# 生成train,test,val,all_data作为deepFM等等的输入，只有9个特征
+# g_deep()
+
+# 生成一阶和二阶的特征来作为lgb的训练
 get_feature()
-# train_val_split()
+
+# 将生成的all_data_lgb进行train和val的切分
+collect_train_val_split()
+
+# face_data的合并
