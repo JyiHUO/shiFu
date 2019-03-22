@@ -2,18 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff8f8378-b809-4fbf-8315-c22f06391e8e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/data_process.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../export/extract_feature.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/extract_feature.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/extract_feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/extract_feature.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

@@ -31,7 +31,7 @@ duration_time
 '''
 
 
-def g_train_first_order(data):
+def g_train(data):
     columns = data.columns
     data = data.copy().values
     vector_f = ["uid", "user_city", "item_id", "author_id", "item_city",
@@ -74,12 +74,13 @@ def g_train_first_order(data):
                     .count().rename(f1+"_"+f2+"_count").reset_index()
 
                 test = test.merge(right=feature_num, how="left", on=[f1, f2])
+                print(test.head(1))
 
         test.fillna(0, inplace=True)
         test.to_csv(Config["save_all_data_path"]+str(count), index=False)
 
 
-def g_test_first_order_two(train, test):
+def g_test_two(train, test):
     vector_f = ["uid", "user_city", "item_id", "author_id", "item_city",
                 "channel", "music_id", "device", "duration_time"]
     for i in range(len(vector_f)):
@@ -113,6 +114,7 @@ def g_test_first_order_two(train, test):
                 .count().rename(f1 + "_" + f2 + "_count").reset_index()
 
             test = test.merge(right=feature_num, how="left", on=[f1, f2])
+            print(test.head(1))
 
     test.fillna(0, inplace=True)
     test.to_csv(Config["save_test_path"], index=False)
@@ -137,12 +139,10 @@ def get_feature():
 
     print("start feature extraction")
 
-    g_train_first_order(data)
+    g_train(data)
     print("finish train data")
-    g_test_first_order_two(data, test)
+    g_test_two(data, test)
     print("finish test data")
-
-
 
 
 def collect_train_val_split():
