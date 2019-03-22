@@ -14,23 +14,6 @@ device_id: 71681
 Duration: 128
 '''
 
-print("start reading data")
-columns = ["uid", "user_city", "item_id", "author_id", "item_city",
-               "channel", "music_id", "device",  "duration_time", "finish", "like"]
-all_data = pd.read_csv(Config["all_data_path"])
-all_data = all_data[columns]
-test = pd.read_csv(Config["test_path"])
-test = test[columns]
-# train = pd.read_csv(Config["train_path"])
-# train = train[columns]
-#
-# val = pd.read_csv(Config["val_path"])
-# val = val[columns]
-
-print("finish reading data")
-
-print("start feature extraction")
-
 
 '''
 onehot：
@@ -54,8 +37,10 @@ def g_train_first_order(data):
     vector_f = ["uid", "user_city", "item_id", "author_id", "item_city",
                 "channel", "music_id", "device", "duration_time"]
     kf = KFold(n_splits=7, shuffle=False)
-    new_data = []
+    count = 0
     for train_index, test_index in kf.split(data):
+        count += 1
+        print("*************"+str(count)+"*****************")
         train = pd.DataFrame(data=data[train_index], columns=columns)
         test = pd.DataFrame(data=data[test_index], columns=columns)
         for i in range(len(vector_f)):
@@ -90,10 +75,8 @@ def g_train_first_order(data):
 
                 test = test.merge(right=feature_num, how="left", on=[f1, f2])
 
-        new_data.append(test)
-    new_data = pd.concat(new_data, 0)
-    new_data.fillna(0, inplace=True)
-    return new_data
+        test.fillna(0, inplace=True)
+        test.to_csv(Config["save_all_data_path"]+str(count), index=False)
 
 
 def g_test_first_order_two(train, test):
@@ -132,28 +115,44 @@ def g_test_first_order_two(train, test):
             test = test.merge(right=feature_num, how="left", on=[f1, f2])
 
     test.fillna(0, inplace=True)
-    return test
+    test.to_csv(Config["save_test_path"], index=False)
 
 
-def get_feature(data, test):
+def get_feature():
     '''
     :param train: can be train.csv or all_data.csv
     :param test: can be val.csv or test.csv
     (train.csv, val_csv), (all_data.csv, test.csv)
     :return:
     '''
-    data = data.copy()
-    test = test.copy()
+    print("start reading data")
+    columns = ["uid", "user_city", "item_id", "author_id", "item_city",
+               "channel", "music_id", "device", "duration_time", "finish", "like"]
+    data = pd.read_csv(Config["all_data_path"])
+    data = data[columns]
+    test = pd.read_csv(Config["test_path"])
+    test = test[columns]
 
-    test = g_test_first_order_two(data, test)
-    print("finish test data")
-    data = g_train_first_order(data)
+    print("finish reading data")
+
+    print("start feature extraction")
+
+    g_train_first_order(data)
     print("finish train data")
-
-    test.to_csv(Config["save_test_path"], index=False)
-    data.to_csv(Config["save_all_data_path"], index=False)
-
+    g_test_first_order_two(data, test)
+    print("finish test data")
 
 
 
-get_feature(all_data, test)
+
+def collect_train_val_split():
+    data = pd.read_csv(Config["save_all_data_path"])
+    L = data.shape[0]
+    train = data[:int(0.8*L)]
+    val = data[int(0.8*L):]
+    train.to_csv(Config["save_train_path"], index=False)
+    val.to_csv(Config["save_test_path"], index=False)
+
+
+get_feature()
+# train_val_split()
