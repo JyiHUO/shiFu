@@ -1,9 +1,12 @@
 import pandas as pd
-import lightgbm as lgb
+# import lightgbm as lgb
 from config import Config
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, LabelEncoder
 from sklearn.model_selection import KFold
 import numpy as np
+import ast
+import pickle
+import json
 '''
 user_id_num: 70711
 item_id_num:  3687156
@@ -93,6 +96,7 @@ def g_deep():
     print("finish test")
     data.to_csv(Config["all_data_path"], index=False)
 
+
 def g_train(data):
     columns = data.columns
     data = data.copy().values
@@ -139,7 +143,6 @@ def g_train(data):
                 print(test.head(1))
                 print("check null number")
                 print(np.sum(test.isnull())/test.shape[0])
-
 
         test.fillna(0, inplace=True)
         test.to_csv(Config["save_all_data_path"]+str(count), index=False)
@@ -225,13 +228,199 @@ def collect_train_val_split():
     val.to_csv(Config["save_test_path"], index=False)
 
 
+def g_face_data():
+    '''
+    item_id	male_perc	female_perc	faces	maleBeauty	femaleBeauty	faceSquare	male_num	femalie_num
+    to json
+    :return:
+    '''
+    face_data = pd.read_csv(Config["raw_face_data_path"])
+    # fill mean value with zero
+    def m(x):
+        if x["faces"] == 0:
+            x["maleBeauty"] = 0
+            x["femaleBeauty"] = 0
+        else:
+            pass
+        return x
+
+    face_data = face_data.apply(m, 1)
+    face_data["male_num"] = face_data.male_perc * face_data.faces
+    face_data["female_num"] = face_data.female_perc * face_data.faces
+    face_data.male_num = face_data.male_num.apply(lambda x: round(x))
+    face_data.female_num = face_data.female_num.apply(lambda x: round(x))
+
+    # cut value
+    # male_perc
+    def cut_value(data):
+        for col in ["male_perc", "female_perc", "maleBeauty", "femaleBeauty", "faceSquare"]:
+            mask = data[col] == 0
+            t = pd.cut(np.log(data[col] + 1), bins=100, labels=np.arange(100) + 1).astype(int)
+            t[mask] = 0
+            data[col] = t
+        return data
+
+    face_data = cut_value(face_data)
+    le = LabelEncoder()
+    face_data["male_num"] = le.fit_transform(face_data["male_num"].astype(int))
+    le = LabelEncoder()
+    face_data["female_num"] = le.fit_transform(face_data["female_num"].astype(int))
+    le = LabelEncoder()
+    face_data["faces"] = le.fit_transform(face_data["faces"].astype(int))
+    print(face_data.head())
+    print(face_data.columns)
+    print(face_data.nunique())
+    # face_data.to_csv("test.csv", index=False)
+
+    # face_data.to_csv(Config["face_data_path"], index=False)
+    big_dict = {}
+    for i in face_data.values:
+        big_dict[int(float(i[0]))] = list(i[1:])
+    with open(Config["face_data_path"], "w") as f:
+        json.dump(big_dict, f)
+    print("finish generate face data")
+    for i in big_dict:
+        print(big_dict[i])
+        break
+
+
+def g_title_data(column_l=10):
+    '''
+    一共有134409 + 2个词
+    item_id
+    title_length
+    word_0
+    word_1
+    word_2
+    word_3
+    word_4
+    word_5
+    word_6
+    word_7
+    word_8
+    word_9
+    to json
+    :param column_l:
+    :return:
+    '''
+    # extract title data
+    title = []
+    with open(Config["raw_title_data_path"]) as f:
+        for i in f:
+            # print (i)
+            a = ast.literal_eval(i)
+            # print (a)
+            title.append(a)
+    print("title num: ", len(title))
+    # word frequenty
+    word = {}
+    for i in title:
+        for key in i["title_features"].keys():
+            if key in word:
+                word[key] += i["title_features"][key]
+            else:
+                word[key] = i["title_features"][key]
+    # remove word which frequently appearance
+    word_data = pd.DataFrame.from_dict(word, orient="index").reset_index()
+    word_data.columns = ["word_id", "word_num"]
+    useful_word = set(word_data[word_data.word_num < word_data.word_num.quantile(0.999)].word_id.values)
+
+    # 提取前30个词保存为dataframe
+    data_c = np.zeros((len(title), column_l+2))
+    for i, v in enumerate(title):
+        data_c[i, 0] = v["item_id"]
+        data_c[i, 1] = sum(v["title_features"].values())
+        c = 2
+        for j in v["title_features"].keys():
+            if not j in useful_word:
+                continue
+            if c > column_l + 1:
+                break
+            for z in range(v["title_features"][j]):
+                if c > column_l + 1:
+                    break
+                data_c[i, c] = int(j)
+                c += 1
+    columns = ["item_id", "title_length"]
+    columns.extend(["word_" + str(i) for i in range(column_l)])
+    title_data = pd.DataFrame(data_c, columns=columns).astype(int)
+    # label encoder
+    le = LabelEncoder()
+    title_data["title_length"] = le.fit_transform(title_data["title_length"].astype(int))
+
+    print(title_data.shape)
+    print(title_data.head(2))
+    print(title_data.nunique())
+    # title_data.to_csv(Config["title_data_path"], index=False)
+    # save to json
+    big_dict = {}
+    for i in title_data.values:
+        big_dict[str(int(float(i[0])))] = [int(j) for j in i[1:]] # list(i[1:])
+    with open(Config["title_data_path"], "w") as f:
+        json.dump(big_dict, f)
+    for i in big_dict:
+        print(big_dict[i])
+        break
+
+
+def g_vedio():
+    '''
+    to json
+    item_id, video_feature_dim_128
+    {"item_id_int":list_dim_128_float(a list not numpy array),
+    1:[1.2,3.43 ... ]
+    }
+    :return:
+    '''
+    big_dict = {}
+    print("start video reading")
+    with open(Config["raw_video_data_path"]) as f:
+        for i in f:
+            a = ast.literal_eval(i)
+            big_dict[a["item_id"]] = a["video_feature_dim_128"]
+    print("finish video reading")
+    with open(Config["video_data_path"], "w") as jj:
+        json.dump(big_dict, jj)
+    print("finish video saving")
+
+
+def g_audio():
+    '''
+    to json
+    item_id, video_feature_dim_128
+    {"item_id_int":list_dim_128_float(a list not numpy array),
+    1:[1.2,3.43 ... ]
+    }
+    :return:
+    '''
+    big_dict = {}
+    print("start audio reading")
+    with open(Config["raw_audio_data_path"]) as f:
+        for i in f:
+            a = ast.literal_eval(i)
+            big_dict[a["item_id"]] = a["audio_feature_128_dim"]
+    print("finish audio reading")
+    with open(Config["audio_data_path"], "w") as jj:
+        json.dump(big_dict, jj)
+    print("finish audio saving")
+
 # 生成train,test,val,all_data作为deepFM等等的输入，只有9个特征
 # g_deep()
 
 # 生成一阶和二阶的特征来作为lgb的训练
-get_feature()
+# get_feature()
 
 # 将生成的all_data_lgb进行train和val的切分
-collect_train_val_split()
+# collect_train_val_split()
 
-# face_data的合并
+# face_data生成
+# g_face_data()
+
+# title data生成
+# g_title_data()
+
+# video data 生成
+g_vedio()
+
+# audio data生成
+g_audio()

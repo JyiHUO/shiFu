@@ -23,7 +23,7 @@ class Engine(object):
         # "user_id"0, "user_city"1, "item_id"2, "author_id"3, "item_city"4,
         # "channel"5, "finish"6, "like"7, "music_id"8, "device"9
 
-        X = batch[:, :9]
+        X = batch[:, :-1]
         target = batch[:, -1]
         if Config["normal_config"]['use_cuda'] is True:
             X = X.cuda()
@@ -67,7 +67,7 @@ class Engine(object):
         avg_auc = []
 
         for batch_id, batch in enumerate(train_loader):
-            assert isinstance(batch[0], torch.LongTensor)
+            # assert isinstance(batch[0], torch.LongTensor)
             loss, auc = self.train_single_batch(batch)
             print('[Training Epoch {}] Batch {}, Loss {}, task {}, auc {}'.format(
                 epoch_id, batch_id, loss, Config["normal_config"]["task"], auc))
