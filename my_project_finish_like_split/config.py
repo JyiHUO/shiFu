@@ -306,7 +306,7 @@ else:
             'num_epoch': 10,
             'batch_size': 1024 * 2,
             'optimizer': 'adam',
-            'adam_lr': 0.001,
+            'adam_lr': 0.0001,
             'l2_regularization': 0.0000001
         }
 
