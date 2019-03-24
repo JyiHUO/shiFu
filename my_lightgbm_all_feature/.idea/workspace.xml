@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="09275949-9302-402b-9bd7-7e6c88622106" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/model/nffm.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/model/nffm.py" afterDir="false" />
-    </list>
+    <list default="true" id="09275949-9302-402b-9bd7-7e6c88622106" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

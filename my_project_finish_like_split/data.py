@@ -54,6 +54,8 @@ class my_dataset(Dataset):
             title_length = title_data[0]
             title_word = title_data[1:]
             video = self.video.get(item_id, np.zeros(128))
+            if len(video) != 128:
+                video = np.zeros(128)
             audio = self.audio.get(item_id, np.zeros(128))
             behaviour = None
             # print(face)
