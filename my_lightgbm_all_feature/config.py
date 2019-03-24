@@ -15,8 +15,8 @@ Config = {
         # for lgb
         "save_test_path": "../../cache/track2/tmp/test_lgb.csv",
         "save_all_data_path": "../../cache/track2/tmp/all_data_lgb.csv",
-        "save_train_path": "../../cache/track2/tmp/train_lgb.csv",
-        "save_val_path": "../../cache/track2/tmp/val_lgb.csv",
+        "save_train_path": "../../cache/track2/tmp/all_data_lgb.csv1",
+        "save_val_path": "../../cache/track2/tmp/all_data_lgb.csv2",
         # title data
         "raw_title_data_path": "../../data/track2/track2_title.txt",
         "title_data_path": "../../cache/track2/tmp/title_data.json",

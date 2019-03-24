@@ -211,7 +211,24 @@ else:
             "hd5_val_path": "../../cache/track2/tmp/hd5_val.hd5",
             "raw_test_path": '../../data/track2/final_track2_test_no_anwser.txt',
             "raw_data_path": "../../data/track2/final_track2_train.txt",
-            "predict_file": "../../cache/track2/result/result.csv"
+            "predict_file": "../../cache/track2/result/result.csv",
+            # for lgb
+            "save_test_path": "../../cache/track2/tmp/test_lgb.csv",
+            "save_all_data_path": "../../cache/track2/tmp/all_data_lgb.csv",
+            "save_train_path": "../../cache/track2/tmp/train_lgb.csv",
+            "save_val_path": "../../cache/track2/tmp/val_lgb.csv",
+            # title data
+            "raw_title_data_path": "../../data/track2/track2_title.txt",
+            "title_data_path": "../../cache/track2/tmp/title_data.json",
+            # face data
+            "raw_face_data_path": "../../cache/track2/tmp/track2_face_attrs_fill.csv",
+            "face_data_path": "../../cache/track2/tmp/face_data.json",
+            # video data
+            "raw_video_data_path": "../../data/track2/track2_video_features.txt",
+            "video_data_path": "../../cache/track2/tmp/video_data.json",
+            # audio data
+            "raw_audio_data_path": "../../data/track2/track2_audio_features.txt",
+            "audio_data_path": "../../cache/track2/tmp/audio_data.json"
         }
 
         model_config = {

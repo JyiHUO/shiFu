@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09275949-9302-402b-9bd7-7e6c88622106" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../data_process/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../data_process/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../export/.ipynb_checkpoints/check_extract_data-checkpoint.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/.ipynb_checkpoints/check_extract_data-checkpoint.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../export/check_extract_data.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/check_extract_data.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../export/extract_feature.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/extract_feature.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../export/分享.md" beforeDir="false" afterPath="$PROJECT_DIR$/../export/分享.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extract_feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/extract_feature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lgb_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/lgb_train.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/data.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/data.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/model/nffm.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/model/nffm.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/extract_feature.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="309" column="23" lean-forward="true" selection-start-line="309" selection-start-column="23" selection-end-line="309" selection-end-column="23" />
+            <state relative-caret-position="3723">
+              <caret line="313" column="35" lean-forward="true" selection-start-line="313" selection-start-column="35" selection-end-line="313" selection-end-column="35" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -39,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lgb_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
+            <state relative-caret-position="192">
+              <caret line="53" column="10" lean-forward="true" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
               </folding>
@@ -54,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="674">
-              <caret line="48" column="25" lean-forward="true" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+            <state relative-caret-position="163">
+              <caret line="18" column="57" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -81,15 +72,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/lgb_baseline.py" />
+        <option value="$PROJECT_DIR$/extract_feature.py" />
         <option value="$PROJECT_DIR$/lgb_train.py" />
         <option value="$PROJECT_DIR$/config.py" />
-        <option value="$PROJECT_DIR$/extract_feature.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="8" />
-    <option name="y" value="44" />
+    <option name="x" value="116" />
+    <option name="y" value="32" />
     <option name="width" value="1328" />
     <option name="height" value="877" />
   </component>
@@ -171,15 +162,15 @@
       <option name="presentableId" value="Default" />
       <updated>1553092086342</updated>
       <workItem from="1553092088933" duration="2184000" />
-      <workItem from="1553150313034" duration="51560000" />
+      <workItem from="1553150313034" duration="53708000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="53744000" />
+    <option name="totallyTimeSpent" value="55892000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="8" y="44" width="1328" height="877" extended-state="0" />
+    <frame x="116" y="32" width="1328" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18429238" />
@@ -258,29 +249,29 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/lgb_train.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="41" column="8" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="674">
-          <caret line="48" column="25" lean-forward="true" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="25" />
+        <state relative-caret-position="163">
+          <caret line="18" column="57" selection-start-line="18" selection-start-column="57" selection-end-line="18" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/extract_feature.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="309" column="23" lean-forward="true" selection-start-line="309" selection-start-column="23" selection-end-line="309" selection-end-column="23" />
+        <state relative-caret-position="3723">
+          <caret line="313" column="35" lean-forward="true" selection-start-line="313" selection-start-column="35" selection-end-line="313" selection-end-column="35" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lgb_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="53" column="10" lean-forward="true" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
           </folding>
         </state>
       </provider>
