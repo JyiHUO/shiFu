@@ -4,6 +4,7 @@
 import torch
 from sklearn import metrics
 from config import Config
+from torch import optim
 
 
 # Checkpoints
@@ -33,6 +34,12 @@ def use_optimizer(network):
                                         alpha=Config["training_config"]['rmsprop_alpha'],
                                         momentum=Config["training_config"]['rmsprop_momentum'])
     return optimizer
+
+
+def use_scheduler(opt, batch_step=3500,gamma=0.1):
+    scheduler = optim.lr_scheduler.StepLR(opt, step_size=Config["training_config"]["batch_step"],
+                                          gamma=Config["training_config"]["gamma"])
+    return scheduler
 
 
 def cal_auc(y_true, y_pred):

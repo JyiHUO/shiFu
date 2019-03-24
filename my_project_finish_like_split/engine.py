@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from tensorboardX import SummaryWriter
 
-from utils import save_checkpoint, use_optimizer
+from utils import save_checkpoint, use_optimizer, use_scheduler
 import numpy as np
 from utils import cal_auc
 from config import Config
@@ -14,6 +14,7 @@ class Engine(object):
         self._writer = SummaryWriter(log_dir=Config["normal_config"]["model_log_dir"])  # tensorboard writer
         # self._writer.add_text('config', str(config), 0)
         self.opt = use_optimizer(self.model)
+        self.scheduler = use_scheduler(self.opt)
         self.crit = nn.BCELoss()
 
     def batch_forward(self, batch):
@@ -57,6 +58,7 @@ class Engine(object):
         # gradient update
         loss.backward()
         self.opt.step()
+        self.scheduler.step()
 
         return loss.cpu().detach().numpy(), auc
 
@@ -69,10 +71,14 @@ class Engine(object):
         for batch_id, batch in enumerate(train_loader):
             # assert isinstance(batch[0], torch.LongTensor)
             loss, auc = self.train_single_batch(batch)
-            print('[Training Epoch {}] Batch {}, Loss {}, task {}, auc {}'.format(
-                epoch_id, batch_id, loss, Config["normal_config"]["task"], auc))
+            print('[Training Epoch {}] Batch {}, Loss {}, lr {}, task {}, auc {}'.format(
+                epoch_id, batch_id, loss, self.opt.param_groups[0]["lr"], Config["normal_config"]["task"], auc))
             total_loss.append(loss)
             avg_auc.append(auc)
+
+            self._writer.add_scalar('train_performance/total_loss_batch', loss, batch_id)
+            self._writer.add_scalar('train_performance/avg_auc_batch', auc, batch_id)
+
         self._writer.add_scalar('train_performance/total_loss', np.mean(total_loss), epoch_id)
         self._writer.add_scalar('train_performance/avg_auc', np.mean(avg_auc), epoch_id)
 
