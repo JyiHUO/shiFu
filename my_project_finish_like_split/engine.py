@@ -22,7 +22,7 @@ class Engine(object):
         # [0, 1, 2, 3, 4, 5, 8, 9, 6, 7]
         # "user_id"0, "user_city"1, "item_id"2, "author_id"3, "item_city"4,
         # "channel"5, "finish"6, "like"7, "music_id"8, "device"9
-
+        # print(batch.size())
         X = batch[:, :-1]
         target = batch[:, -1]
         if Config["normal_config"]['use_cuda'] is True:

@@ -59,8 +59,8 @@ class NFFM(nn.Module):
         
         
         dim = self.emb_size * self.config['interactive_field_size'] * (self.config['interactive_field_size'] - 1) / 2 \
-              + self.emb_size * self.config['interactive_field_size'] * 2 + self.config['emb_size']*10 + 356 
-        self.lin = nn.Linear(int(dim), 2)
+              + self.emb_size * self.config['interactive_field_size'] * 2 + self.config['emb_size']*10 + 256
+        self.lin = nn.Linear(int(dim), 1)
         
     def forward(self, x):
         """
@@ -116,7 +116,7 @@ class NFFM(nn.Module):
         out = t.cat(total_features, dim=1)
         y = F.sigmoid(self.lin(F.relu(out)))
                  
-        return y[:, 0], y[:, 1]
+        return y
     
 
 class Interac(nn.Module):

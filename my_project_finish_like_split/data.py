@@ -56,6 +56,9 @@ class my_dataset(Dataset):
             video = self.video.get(item_id, np.zeros(128))
             audio = self.audio.get(item_id, np.zeros(128))
             behaviour = None
+            # print(face)
+            # print(title_word)
+            # print(title_length)
 
             if Config["normal_config"]["task"] == "finish":
                 behaviour = self.data[index][[0, 1, 2, 3, 4, 5, 8, 9, 11, 6]]  # finish or like is in the end
@@ -78,10 +81,18 @@ class SampleGenerator(object):
             self.title_json = json.load(f)
         with open(Config["normal_config"]["face_data_path"], "r") as f:
             self.face_json = json.load(f)
+        print("start reading video")
         with open(Config["normal_config"]["video_data_path"], "r") as f:
             self.video_json = json.load(f)
+        print("start reading audio")
         with open(Config["normal_config"]["audio_data_path"], "r") as f:
             self.audio_json = json.load(f)
+        print("finish reading ")
+
+        # self.title_json = dict()
+        # self.face_json = dict()
+        # self.video_json = dict()
+        # self.audio_json = dict()
 
     def instance_a_loader(self, t="train"):
         """instance train loader for one training epoch"""
