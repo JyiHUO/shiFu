@@ -84,7 +84,7 @@ class Engine(object):
         target_list = []
 
         for batch_id, batch in enumerate(evaluate_data):
-            assert isinstance(batch[0], torch.LongTensor)
+            # assert isinstance(batch[0], torch.LongTensor)
             target, pred, loss, auc = self.batch_forward(batch)
 
             print('[Evaluating Epoch {}] Batch {}, Loss {}, task {}, auc {}'.format(
@@ -121,7 +121,7 @@ class Engine(object):
         pred_list = []
 
         for batch_id, batch in enumerate(test_data):
-            assert isinstance(batch[0], torch.LongTensor)
+            # assert isinstance(batch[0], torch.LongTensor)
             target, pred, loss, auc = self.batch_forward(batch)
 
             uid.append(batch[:, 0].cpu().detach().numpy())
