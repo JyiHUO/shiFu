@@ -111,7 +111,8 @@ if compute == "cpu":
                 'interactive_field_max_num_list': [73974, 397, 4122689, 850308, 462, 5, 89779, 75085, 641],
                 'emb_size': 20,
                 'no_inter_field_max_num_list': [69, 102, 102, 93, 102, 102, 102, 45, 75],
-                'title_size': 134544+2
+                'title_size': 134544+2,
+                "layers": [256, 256, 128, 128, 64, 32, 1]
             }
         }
 
@@ -300,7 +301,8 @@ else:
                 'interactive_field_max_num_list': [73974, 397, 4122689, 850308, 462, 5, 89779, 75085, 641],
                 'emb_size': 20,
                 'no_inter_field_max_num_list': [69, 102, 102, 93, 102, 102, 102, 45, 75],
-                'title_size': 134544+2
+                'title_size': 134544+2,
+                "layers": [256, 256, 128, 128, 64, 32, 1]
             }
         }
 

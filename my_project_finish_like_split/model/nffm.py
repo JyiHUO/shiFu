@@ -61,7 +61,17 @@ class NFFM(nn.Module, BaseModel):
         
         dim = self.emb_size * self.config['interactive_field_size'] * (self.config['interactive_field_size'] - 1) / 2 \
               + self.emb_size * self.config['interactive_field_size'] * 2 + self.config['emb_size']*10 + 256
-        self.lin = nn.Linear(int(dim), 1)
+
+        start = dim
+        linear_layer = []
+        bn = []
+        for end in self.config["layers"]:
+            linear_layer.append(nn.Linear(start, end))
+            if end != 1:
+                bn.append(nn.BatchNorm1d(end))
+        self.linear_layer = nn.ModuleList(linear_layer)
+        self.bn = nn.ModuleList(bn)
+
         
     def forward(self, x):
         """
@@ -115,8 +125,14 @@ class NFFM(nn.Module, BaseModel):
         total_features.append(x_autio)
         
         out = t.cat(total_features, dim=1)
-        y = F.sigmoid(self.lin(F.relu(out)))
-                 
+
+        # DNN part
+        for i in range(len(self.linear_layer)):
+            out = self.linear_layers[i](out)
+            if i != len(self.linear_layers) - 1:
+                out = self.bn[i](out)
+
+        y = F.sigmoid(out)  
         return y
     
 
