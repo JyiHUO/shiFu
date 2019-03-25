@@ -128,15 +128,22 @@ class Engine(object):
 
         for batch_id, batch in enumerate(test_data):
             # assert isinstance(batch[0], torch.LongTensor)
+            print("batch_id: ", batch_id)
             target, pred, loss, auc = self.batch_forward(batch)
 
             uid.append(batch[:, 0].cpu().detach().numpy())
             item_id.append(batch[:, 2].cpu().detach().numpy())
             pred_list.append(pred.cpu().detach().numpy())
+            print(uid[0].shape)
+            print(item_id[0].shape)
+            print(pred_list[0].shape)
 
         uid = np.concatenate(uid).astype(int)
         item_id = np.concatenate(item_id).astype(int)
         pred_probability = np.concatenate(pred_list)
+        print(uid.shape)
+        print(item_id.shape)
+        print(pred_probability.shape)
 
         data = np.concatenate([uid[:, None], item_id[:, None], pred_probability[:, None]], 1)
         df = pd.DataFrame(data, columns=["uid", "item_id","pred_probability"])
