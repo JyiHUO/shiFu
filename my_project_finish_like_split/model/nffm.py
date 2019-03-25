@@ -11,6 +11,7 @@ from torch.autograd import Variable as V
 from torch import nn
 from torch.nn import functional as F
 from torch import optim
+from .base_model import BaseModel
 
 
 """
@@ -26,7 +27,7 @@ from torch import optim
 #         }
 
 
-class NFFM(nn.Module):
+class NFFM(nn.Module, BaseModel):
     def __init__(self, config):
         super(NFFM, self).__init__()
         config = config["model_config"]["NFFM"]
