@@ -5,7 +5,8 @@ Config = {
         'device_id': 0,
         "num_workers": 8,
         'pretrain': False,
-        'model_dir': '../../cache/track2/checkpoints/lgb.model',
+        'model_path_all_views': '../../cache/track2/checkpoints/lgb_all_views.model',
+        "model_path_media": "../../cache/track2/checkpoints/lgb_media.model",
         "train_path": "../../cache/track2/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
         "val_path": "../../cache/track2/tmp/val.csv",
         "test_path": "../../cache/track2/tmp/test.csv",
@@ -28,7 +29,8 @@ Config = {
         "raw_audio_data_path": "../../data/track2/track2_audio_features.txt",
         "audio_data_path": "../../cache/track2/tmp/audio_data.json",
         # lgb all feature big data
-        "big_data_all_feature_path": "../../cache/track2/tmp/big_data_all_feature.csv"
+        "big_data_all_feature_path": "../../cache/track2/tmp/big_data_all_feature.csv",
+        "big_test_all_feature_path": "../../cache/track2/tmp/big_test_all_feature.csv"
     }
 normal_config = {
     # interaction

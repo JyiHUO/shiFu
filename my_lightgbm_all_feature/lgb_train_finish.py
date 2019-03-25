@@ -3,8 +3,8 @@ from config import Config
 import pandas as pd
 import pickle
 
-train = pd.read_csv(Config["save_train_path"])
-val = pd.read_csv(Config["save_val_path"])
+train = pd.read_csv(Config["save_train_path"]+"3")
+val = pd.read_csv(Config["save_val_path"]+"4")
 # all_data = pd.read_csv(Config["save_all_data_path"])
 
 # train
@@ -30,7 +30,6 @@ clf_finish = lgb.LGBMClassifier(
     subsample=0.7, colsample_bytree=0.7, subsample_freq=1,
     learning_rate=0.05, min_child_weight=50, random_state=2019, n_jobs=-1
 )
-
 
 
 # for offline validation
