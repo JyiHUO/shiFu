@@ -19,8 +19,10 @@ for i in range(start, end+1):
         title = json.load(f)
     title = pd.DataFrame.from_dict(title, orient='index')
     title.reset_index(inplace=True)
+    print(title.shape)
     columns = ["item_id", "title_length"]
     columns.extend(["word_" + str(i) for i in range(10)])
+    print(len(columns))
     title.columns = columns
     title = title.astype(int)
 
@@ -36,9 +38,11 @@ for i in range(start, end+1):
     print("reading face data")
     with open(Config["face_data_path"], "r") as f:
         face = json.load(f)
-    face = pd.DataFrame.from_dict(face)
+    face = pd.DataFrame.from_dict(face, orient='index')
     face.reset_index(inplace=True)
+    print(face.shape)
     columns = ["item_id", "male_perc","female_perc","faces","maleBeauty","femaleBeauty","faceSquare", "male_num", "femalie_num"]
+    print(len(columns))
     face.columns = columns
     face = face.astype(int)
 
@@ -54,7 +58,7 @@ for i in range(start, end+1):
     print("reading video data")
     with open(Config["video_data_path"], "r") as f:
         video = json.load(f)
-    video = pd.DataFrame.from_dict(video)
+    video = pd.DataFrame.from_dict(video, orient='index')
     video.reset_index(inplace=True)
     columns = ["item_id"]
     columns.extend(["video_"+str(i) for i in range(128)])
@@ -73,7 +77,7 @@ for i in range(start, end+1):
     print("reading audio data")
     with open(Config["audio_data_path"], "r") as f:
         audio = json.load(f)
-    audio = pd.DataFrame.from_dict(audio)
+    audio = pd.DataFrame.from_dict(audio, orient='index')
     audio.reset_index(inplace=True)
     columns = ["item_id"]
     columns.extend(["audio_"+str(i) for i in range(128)])
