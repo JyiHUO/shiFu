@@ -30,8 +30,8 @@ from .base_model import BaseModel
 class NFFM(nn.Module, BaseModel):
     def __init__(self, config):
         super(NFFM, self).__init__()
-        config = config["model_config"]["NFFM"]
-        self.config = config
+        self.config = config["model_config"]["NFFM"]
+        self.path_config = config
         self.emb_size = self.config['emb_size']
         # interactive part 0 - 8
         # 2 order feature

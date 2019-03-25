@@ -6,7 +6,7 @@ from torch import optim
 
 class BaseModel:
     def __init__(self):
-        self.config = None
+        self.path_config = None
         model_config = None
         data_config = None
 
@@ -14,7 +14,7 @@ class BaseModel:
         pass
 
     def load_pretrain_weights(self):
-        self.load_state_dict(torch.load(self.config["normal_config"]["pretrain_model_dir"]))
+        self.load_state_dict(torch.load(self.path_config["normal_config"]["pretrain_model_dir"]))
         self.eval()
 
 
