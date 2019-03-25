@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train_like.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/merge_all_views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../export/data_exporation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/data_exporation.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/extract_feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/extract_feature.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train_finish.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/nffm.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/nffm.py" afterDir="false" />
-    </list>
+    <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,8 +105,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/nffm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1075">
-              <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+            <state relative-caret-position="129">
+              <caret line="126" column="8" lean-forward="true" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
               <folding>
                 <element signature="e#88#106#0" expanded="true" />
               </folding>
@@ -218,8 +208,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="134" />
-    <option name="y" value="78" />
+    <option name="x" value="117" />
+    <option name="y" value="45" />
     <option name="width" value="1328" />
     <option name="height" value="877" />
   </component>
@@ -422,12 +412,12 @@
       <workItem from="1553139672303" duration="532000" />
       <workItem from="1553176674316" duration="1180000" />
       <workItem from="1553312212484" duration="364000" />
-      <workItem from="1553353296503" duration="28556000" />
+      <workItem from="1553353296503" duration="29059000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125329000" />
+    <option name="totallyTimeSpent" value="125832000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -439,7 +429,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="134" y="78" width="1328" height="877" extended-state="0" />
+    <frame x="117" y="45" width="1328" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18273717" />
@@ -697,8 +687,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/nffm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1075">
-          <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+        <state relative-caret-position="129">
+          <caret line="126" column="8" lean-forward="true" selection-start-line="126" selection-start-column="8" selection-end-line="126" selection-end-column="8" />
           <folding>
             <element signature="e#88#106#0" expanded="true" />
           </folding>

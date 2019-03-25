@@ -3,6 +3,7 @@ from config import Config
 import pandas as pd
 import pickle
 import json
+import numpy as np
 
 start = int(input("start: "))
 end = int(input("end: "))
@@ -26,7 +27,7 @@ for i in range(start, end+1):
     # merge, fill and delete
     data = data.merge(title, on="item_id", how="left")
     print(data.head())
-    print(data[columns].isnull())
+    print(np.sum(data[columns].isnull()))
     print(data.shape)
     data.fillna(0, inplace=True)
     del title
@@ -44,7 +45,7 @@ for i in range(start, end+1):
     # merge, fill and delete
     data = data.merge(face, on="item_id", how="left")
     print(data.head())
-    print(data[columns].isnull())
+    print( np.sum(data[columns].isnull()))
     print(data.shape)
     data.fillna(0, inplace=True)
     del face
@@ -63,7 +64,7 @@ for i in range(start, end+1):
     # merge, fill and delete
     data = data.merge(video, on="item_id", how="left")
     print(data.head())
-    print(data[columns].isnull())
+    print( np.sum(data[columns].isnull()))
     print(data.shape)
     data.fillna(0, inplace=True)
     del video
@@ -82,7 +83,7 @@ for i in range(start, end+1):
     # merge, fill and delete
     data = data.merge(audio, on="item_id", how="left")
     print(data.head())
-    print(data[columns].isnull())
+    print( np.sum(data[columns].isnull()))
     print(data.shape)
     data.fillna(0, inplace=True)
     del audio
