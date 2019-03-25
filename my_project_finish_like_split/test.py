@@ -2,13 +2,14 @@ from data import SampleGenerator
 from config import Config
 from models_engine import ModelEngine
 from model.xDeepFM import xDeepFM
+from model.nffm import NFFM
 import fire
 
 
 def model_predict(path_finish, path_like):
     Config["normal_config"]["pretrain"] = True
     Config["normal_config"]["pretrain_model_dir"] = path_finish
-    engine_finish = ModelEngine(config=Config, model=xDeepFM)
+    engine_finish = ModelEngine(config=Config, model=NFFM)
 
     sample_generator = SampleGenerator()
 
@@ -19,7 +20,7 @@ def model_predict(path_finish, path_like):
     print("------------finish testing -------------------")
     print("------------start testing like ----------------")
     Config["normal_config"]["pretrain_model_dir"] = path_like
-    engine_like = ModelEngine(config=Config, model=xDeepFM)
+    engine_like = ModelEngine(config=Config, model=NFFM)
     df_like = engine_like.predict(test_loader)
 
     df_finish["like_probability"] = df_like["pred_probability"]

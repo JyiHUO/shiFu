@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09275949-9302-402b-9bd7-7e6c88622106" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../export/extract_feature.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/extract_feature.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../export/分享.md" beforeDir="false" afterPath="$PROJECT_DIR$/../export/分享.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_project_finish_like_split/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_project_finish_like_split/utils.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +33,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lgb_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
+            <state relative-caret-position="220">
               <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
               <folding>
                 <element signature="e#0#22#0" expanded="true" />
@@ -178,7 +178,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3299363" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34522292" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34522292" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.46369427" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -268,7 +268,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lgb_train.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
+        <state relative-caret-position="220">
           <caret line="10" column="32" lean-forward="true" selection-start-line="10" selection-start-column="32" selection-end-line="10" selection-end-column="32" />
           <folding>
             <element signature="e#0#22#0" expanded="true" />

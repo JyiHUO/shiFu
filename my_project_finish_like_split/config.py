@@ -120,7 +120,9 @@ if compute == "cpu":
             'batch_size': 64,
             'optimizer': 'adam',
             'adam_lr': 0.0001,
-            'l2_regularization': 0.0000001
+            'l2_regularization': 0.0000001,
+            "batch_step": 3000,
+            "gamma": 0.1
         }
 
         data_config = OrderedDict({
@@ -304,9 +306,9 @@ else:
 
         training_config = {
             'num_epoch': 10,
-            'batch_size': 1024 * 2,
+            'batch_size': 1024 * 8,
             'optimizer': 'adam',
-            'adam_lr': 0.0001,
+            'adam_lr': 0.001,
             'l2_regularization': 0.0000001,
             "batch_step": 3000,
             "gamma": 0.1
