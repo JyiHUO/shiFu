@@ -31,19 +31,10 @@ clf_finish = lgb.LGBMClassifier(
     learning_rate=0.05, min_child_weight=50, random_state=2019, n_jobs=-1
 )
 
-clf_like = lgb.LGBMClassifier(
-    boosting_type="gbdt", num_leaves=31, reg_alpha=0.0, reg_lambda=1,
-    max_depth=-1, n_estimators=1500, objective="binary",
-    subsample=0.7, colsample_bytree=0.7, subsample_freq=1,
-    learning_rate=0.05, min_child_weight=50, random_state=2019, n_jobs=-1
-)
+
 
 # for offline validation
 if True:
-    clf_like.fit(train, train_like_label, eval_set=[(val, val_like_label)],
-            eval_metric="auc", early_stopping_rounds=100, verbose=True)
-    with open(Config["model_dir"]+"_offline_"+"like", "wb") as f:
-        pickle.dump(clf_like, f)
     clf_finish.fit(train, train_finish_label, eval_set=[(val, val_finish_label)],
             eval_metric="auc", early_stopping_rounds=100, verbose=True)
     with open(Config["model_dir"]+"_offline_"+"finish", "wb") as f:

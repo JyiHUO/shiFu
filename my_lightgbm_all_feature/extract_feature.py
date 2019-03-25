@@ -420,7 +420,7 @@ def g_audio():
 # g_title_data()
 
 # video data 生成
-g_vedio()
+# g_vedio()
 
 # audio data生成
-g_audio()
+# g_audio()

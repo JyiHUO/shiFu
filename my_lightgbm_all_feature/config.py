@@ -15,8 +15,6 @@ Config = {
         # for lgb
         "save_test_path": "../../cache/track2/tmp/test_lgb.csv",
         "save_all_data_path": "../../cache/track2/tmp/all_data_lgb.csv",
-        "save_train_path": "../../cache/track2/tmp/all_data_lgb.csv1",
-        "save_val_path": "../../cache/track2/tmp/all_data_lgb.csv2",
         # title data
         "raw_title_data_path": "../../data/track2/track2_title.txt",
         "title_data_path": "../../cache/track2/tmp/title_data.json",
@@ -28,7 +26,9 @@ Config = {
         "video_data_path": "../../cache/track2/tmp/video_data.json",
         # audio data
         "raw_audio_data_path": "../../data/track2/track2_audio_features.txt",
-        "audio_data_path": "../../cache/track2/tmp/audio_data.json"
+        "audio_data_path": "../../cache/track2/tmp/audio_data.json",
+        # lgb all feature big data
+        "big_data_all_feature_path": "../../cache/track2/tmp/big_data_all_feature.csv"
     }
 normal_config = {
     # interaction

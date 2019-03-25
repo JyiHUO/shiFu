@@ -2,8 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train_like.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/merge_all_views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../export/data_exporation.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/data_exporation.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/extract_feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/extract_feature.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train_finish.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/nffm.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/nffm.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -40,8 +46,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="304" column="57" selection-start-line="304" selection-start-column="57" selection-end-line="304" selection-end-column="57" />
+            <state relative-caret-position="-367">
+              <caret line="298" column="29" selection-start-line="298" selection-start-column="29" selection-end-line="298" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -85,7 +91,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
+            <state relative-caret-position="123">
               <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
               <folding>
                 <element signature="e#0#12#0" expanded="true" />
@@ -109,8 +115,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/nffm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="312">
-              <caret line="134" column="27" selection-start-line="134" selection-start-column="27" selection-end-line="134" selection-end-column="27" />
+            <state relative-caret-position="1075">
+              <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
               <folding>
                 <element signature="e#88#106#0" expanded="true" />
               </folding>
@@ -212,8 +218,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="45" />
-    <option name="y" value="23" />
+    <option name="x" value="134" />
+    <option name="y" value="78" />
     <option name="width" value="1328" />
     <option name="height" value="877" />
   </component>
@@ -416,12 +422,12 @@
       <workItem from="1553139672303" duration="532000" />
       <workItem from="1553176674316" duration="1180000" />
       <workItem from="1553312212484" duration="364000" />
-      <workItem from="1553353296503" duration="24195000" />
+      <workItem from="1553353296503" duration="28556000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="120968000" />
+    <option name="totallyTimeSpent" value="125329000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -433,7 +439,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="45" y="23" width="1328" height="877" extended-state="0" />
+    <frame x="134" y="78" width="1328" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18273717" />
@@ -652,16 +658,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/engine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-          <folding>
-            <element signature="e#0#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -669,13 +665,6 @@
           <folding>
             <element signature="e#40#65#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="304" column="57" selection-start-line="304" selection-start-column="57" selection-end-line="304" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -689,10 +678,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/engine.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
+          <folding>
+            <element signature="e#0#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-367">
+          <caret line="298" column="29" selection-start-line="298" selection-start-column="29" selection-end-line="298" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model/nffm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="312">
-          <caret line="134" column="27" selection-start-line="134" selection-start-column="27" selection-end-line="134" selection-end-column="27" />
+        <state relative-caret-position="1075">
+          <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
           <folding>
             <element signature="e#88#106#0" expanded="true" />
           </folding>
