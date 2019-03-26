@@ -37,6 +37,10 @@ def lgb_all_views():
             e = time.time()
             print("time consuming: ", e - s)
 
+            del clf
+        del data
+        del data_label
+
 
 def lgb_media():
     for i in range(start, end + 1):
@@ -62,6 +66,10 @@ def lgb_media():
                 pickle.dump(clf, f)
             e = time.time()
             print("time consuming: ", e - s)
+            del clf
+
+        del data
+        del data_label
 
 
 lgb_media()

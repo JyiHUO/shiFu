@@ -1,11 +1,11 @@
 Config = {
-        "model_name": "xDeepFm",
+        "model_name": "lgb",
         "large_file": False,
         'use_cuda': False,
         'device_id': 0,
         "num_workers": 8,
         'pretrain': False,
-        'model_path_all_views': '../../cache/track2/checkpoints/lgb_all_views.model',
+        "model_path_all_views": '../../cache/track2/checkpoints/lgb_all_views.model',
         "model_path_media": "../../cache/track2/checkpoints/lgb_media.model",
         "train_path": "../../cache/track2/tmp/train.csv",  # or ../../data/track2/final_track2_train.txt # train + val
         "val_path": "../../cache/track2/tmp/val.csv",

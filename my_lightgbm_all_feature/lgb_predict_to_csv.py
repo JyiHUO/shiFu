@@ -35,7 +35,38 @@ def lgb_predict_media():
                                      finish_pred, like_pred], 1)
         result_columns = ["uid", "item_id", "finish_probability", "like_probability"]
         result = pd.DataFrame(result, columns=result_columns)
-        result.to_csv(Config["normal_config"]["predict_file"] + "_lgb_"+str(i),
+        result.to_csv(Config["predict_file"] + "_lgb_"+str(i),
                       index=None, float_format="%.6f")
+        del result
+        del finish_pred
+        del like_pred
+        del clf_finish
+        del clf_like
+
+
+def lgb_predict_big():
+    for i in range(1, 8):
+        with open(Config["model_path_all_views"] + "_" + "finish" + "_" + str(i), "rb") as f:
+            clf_finish = pickle.load(f)
+        with open(Config["model_path_all_views"] + "_" + "like" + "_" + str(i), "rb") as f:
+            clf_like = pickle.load(f)
+
+        finish_pred = clf_finish.predict_proba(test_data)[:, 1][:, None]
+        print(finish_pred.shape)
+        like_pred = clf_like.predict_proba(test_data)[:, 1][:, None]
+        print(like_pred.shape)
+
+        result = np.concatenate([uid[:, None], item_id[:, None],
+                                     finish_pred, like_pred], 1)
+        result_columns = ["uid", "item_id", "finish_probability", "like_probability"]
+        result = pd.DataFrame(result, columns=result_columns)
+        result.to_csv(Config["predict_file"] + "_lgb_all_views_"+str(i),
+                      index=None, float_format="%.6f")
+        del result
+        del finish_pred
+        del like_pred
+        del clf_finish
+        del clf_like
+
 
 lgb_predict_media()
