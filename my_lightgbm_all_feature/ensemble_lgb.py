@@ -29,7 +29,7 @@ def lgb_all_views():
                 boosting_type="gbdt", num_leaves=31, reg_alpha=0.0, reg_lambda=1,
                 max_depth=-1, n_estimators=1000, objective="binary",
                 subsample=0.7, colsample_bytree=0.7, subsample_freq=1,
-                learning_rate=0.05, min_child_weight=50, random_state=2019, n_jobs=-1
+                learning_rate=0.05, min_child_weight=50, random_state=2019, n_jobs=5
             )
             clf.fit(data, data_label[task], verbose=True)
             with open(Config["model_path_all_views"] + "_" + task + "_" + str(i), "wb") as f:
@@ -54,9 +54,10 @@ def lgb_media():
                 boosting_type="gbdt", num_leaves=31, reg_alpha=0.0, reg_lambda=1,
                 max_depth=-1, n_estimators=1000, objective="binary",
                 subsample=0.7, colsample_bytree=0.7, subsample_freq=1,
-                learning_rate=0.05, min_child_weight=50, random_state=2019, n_jobs=-1
+                learning_rate=0.05, min_child_weight=50, random_state=2019, n_jobs=5
             )
-            clf.fit(data, data_label[task], verbose=True)
+            clf.fit(data, data_label[task], verbose=True,
+                    eval_set=[(data, data_label[task])], eval_metric="auc")
             with open(Config["model_path_media"] + "_" + task + "_" + str(i), "wb") as f:
                 pickle.dump(clf, f)
             e = time.time()
