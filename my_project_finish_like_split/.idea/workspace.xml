@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/ensemble_lgb.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/ensemble_lgb.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_predict.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -145,8 +144,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="28" column="46" lean-forward="true" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+            <state relative-caret-position="327">
+              <caret line="28" column="52" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="52" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -416,12 +415,12 @@
       <workItem from="1553139672303" duration="532000" />
       <workItem from="1553176674316" duration="1180000" />
       <workItem from="1553312212484" duration="364000" />
-      <workItem from="1553353296503" duration="33928000" />
+      <workItem from="1553353296503" duration="34456000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130701000" />
+    <option name="totallyTimeSpent" value="131229000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -691,8 +690,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="28" column="46" lean-forward="true" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
+        <state relative-caret-position="327">
+          <caret line="28" column="52" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="52" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
