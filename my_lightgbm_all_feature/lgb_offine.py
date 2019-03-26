@@ -22,7 +22,7 @@ del val
 del like
 
 parameters = {
-    "boosting_type": "gdbt",
+    "boosting_type": "gbdt",
     'num_leaves': 31,
     'reg_alpha': 0.0,
     'reg_lambda': 1,

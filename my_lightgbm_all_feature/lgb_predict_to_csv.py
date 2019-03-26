@@ -69,4 +69,4 @@ def lgb_predict_big():
         del clf_like
 
 
-lgb_predict_media()
+lgb_predict_big()
