@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_predict.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/ensemble_lgb.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/train_create_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_predict.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_predict_to_csv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train_finish.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_train_like.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
