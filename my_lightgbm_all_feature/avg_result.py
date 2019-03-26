@@ -13,6 +13,7 @@ del nffm_result
 finish = np.zeros(uid.shape[0], dtype=np.float64)
 like = np.zeros(uid.shape[0], dtype=np.float64)
 for i in range(1, 8):
+    print (i)
     lgb_result = pd.read_csv(Config["predict_file"]+"_lgb_"+str(i))
     finish += lgb_result["finish_probability"].values
     like += lgb_result["like_probability"].values

@@ -32,6 +32,8 @@ duration_time
 4.user_id 跟 item_id组合出现次数
 5.组合正样本次数
 '''
+
+
 def g_deep():
     columns = ["uid", "user_city", "item_id", "author_id", "item_city",
                 "channel", "finish", "like", "music_id", "device",
