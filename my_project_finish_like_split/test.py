@@ -25,7 +25,8 @@ def model_predict(path_finish, path_like):
 
     df_finish["like_probability"] = df_like["pred_probability"]
     df_finish.columns = ["uid", "item_id","finish_probability", "like_probability"]
-    df_finish.to_csv(Config["normal_config"]["predict_file"], index=None, float_format="%.6f")
+    df_finish.to_csv(Config["normal_config"]["predict_file"] + Config["normal_config"]["model_name"],
+                     index=None, float_format="%.6f")
 
 
 fire.Fire(model_predict)

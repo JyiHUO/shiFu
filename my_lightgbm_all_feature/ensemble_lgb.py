@@ -7,6 +7,7 @@ import numpy as np
 import ast
 import pickle
 import json
+import time
 
 start = int(input("start: "))
 end = int(input("end: "))
@@ -21,6 +22,9 @@ def lgb_all_views():
 
         data.drop(["finish", "like"], axis=1, inplace=True)
         for task in ["finish", "like"]:
+            print("number of data: ", i)
+            print("task: ", task)
+            s = time.time()
             clf = lgb.LGBMClassifier(
                 boosting_type="gbdt", num_leaves=31, reg_alpha=0.0, reg_lambda=1,
                 max_depth=-1, n_estimators=1000, objective="binary",
@@ -30,6 +34,8 @@ def lgb_all_views():
             clf.fit(data, data_label[task], verbose=True)
             with open(Config["model_path_all_views"] + "_" + task + "_" + str(i), "wb") as f:
                 pickle.dump(clf, f)
+            e = time.time()
+            print("time consuming: ", e - s)
 
 
 def lgb_media():
@@ -41,6 +47,9 @@ def lgb_media():
 
         data.drop(["finish", "like"], axis=1, inplace=True)
         for task in ["finish", "like"]:
+            print("number of data: ", i)
+            print("task: ", task)
+            s = time.time()
             clf = lgb.LGBMClassifier(
                 boosting_type="gbdt", num_leaves=31, reg_alpha=0.0, reg_lambda=1,
                 max_depth=-1, n_estimators=1000, objective="binary",
@@ -50,6 +59,8 @@ def lgb_media():
             clf.fit(data, data_label[task], verbose=True)
             with open(Config["model_path_media"] + "_" + task + "_" + str(i), "wb") as f:
                 pickle.dump(clf, f)
+            e = time.time()
+            print("time consuming: ", e - s)
 
 
 lgb_media()
