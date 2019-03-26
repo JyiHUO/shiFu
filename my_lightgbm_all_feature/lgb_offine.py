@@ -9,12 +9,17 @@ like = data["like"]
 data.drop(["finish", "like"], axis=1, inplace=True)
 train_data = lgb.Dataset(data, label=like)
 print("train data lgb")
+del data
+del like
 
 val = pd.read_csv(Config["big_data_all_feature_path"] + str(2))
-like = val["like"]
+like = val["like"].iloc[:10000]
+val = val.iloc[:10000]
 val.drop(["finish", "like"], axis=1, inplace=True)
 val_data = lgb.Dataset(val, label=like)
 print("val data lgb")
+del val
+del like
 
 parameters = {
     "boosting_type": "gdbt",

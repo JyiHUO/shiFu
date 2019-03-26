@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_offine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../export/extract_feature.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../export/extract_feature.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/avg_result.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/avg_result.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/extract_feature.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/extract_feature.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_offine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_offine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
