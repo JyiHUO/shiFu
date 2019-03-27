@@ -7,6 +7,7 @@ import numpy as np
 import ast
 import pickle
 import json
+import gc
 
 test_data = pd.read_csv(Config["save_test_path"])
 test_data.drop(["finish", "like"], axis=1, inplace=True)
@@ -42,6 +43,7 @@ def lgb_predict_media():
         del like_pred
         del clf_finish
         del clf_like
+        gc.collect()
 
 
 def lgb_predict_big():
@@ -67,6 +69,7 @@ def lgb_predict_big():
         del like_pred
         del clf_finish
         del clf_like
+        gc.collect()
 
 
 lgb_predict_big()

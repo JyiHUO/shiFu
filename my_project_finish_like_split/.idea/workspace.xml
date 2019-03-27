@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e7e4815d-8cae-49fa-bd1e-53b9fc23c6eb" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_offine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_offine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_predict_to_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/lgb_predict_to_csv.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../my_lightgbm_all_feature/train_create_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../my_lightgbm_all_feature/train_create_model.py" afterDir="false" />
     </list>
@@ -41,7 +40,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2243">
+            <state relative-caret-position="3270">
               <caret line="201" column="23" selection-start-line="201" selection-start-column="13" selection-end-line="201" selection-end-column="23" />
             </state>
           </provider>
@@ -50,7 +49,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/mlp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="724">
+            <state relative-caret-position="549">
               <caret line="33" column="21" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
@@ -417,12 +416,12 @@
       <workItem from="1553139672303" duration="532000" />
       <workItem from="1553176674316" duration="1180000" />
       <workItem from="1553312212484" duration="364000" />
-      <workItem from="1553353296503" duration="36074000" />
+      <workItem from="1553353296503" duration="36228000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132847000" />
+    <option name="totallyTimeSpent" value="133001000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -603,16 +602,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/mlp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="724">
-          <caret line="33" column="21" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
@@ -693,9 +682,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model/mlp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="549">
+          <caret line="33" column="21" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2243">
+        <state relative-caret-position="3270">
           <caret line="201" column="23" selection-start-line="201" selection-start-column="13" selection-end-line="201" selection-end-column="23" />
         </state>
       </provider>

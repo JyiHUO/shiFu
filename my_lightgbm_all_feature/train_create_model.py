@@ -8,6 +8,7 @@ import ast
 import pickle
 import json
 import time
+import gc
 
 start = int(input("start: "))
 end = int(input("end: "))
@@ -37,6 +38,7 @@ def lgb_all_views():
                 pickle.dump(clf, f)
             e = time.time()
             print("time consuming: ", e - s)
+            gc.collect()
 
             del clf
         del data
@@ -68,6 +70,7 @@ def lgb_media():
             e = time.time()
             print("time consuming: ", e - s)
             del clf
+            gc.collect()
 
         del data
         del data_label
