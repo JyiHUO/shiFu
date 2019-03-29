@@ -3,10 +3,11 @@ from config import Config
 from models_engine import ModelEngine
 from model.xDeepFM import xDeepFM
 from model.mlp import MLP
-from model.DTFM import DTFM
+# from model.DTFM import DTFM
 from model.nffm import NFFM
+from model.affm import AFFM
 
-engine = ModelEngine(config=Config, model=NFFM)
+engine = ModelEngine(config=Config, model=AFFM)
 sample_generator = SampleGenerator()
 
 for epoch in range(Config["training_config"]['num_epoch']):
