@@ -4,33 +4,33 @@ from torch.autograd import Variable as V
 from torch import nn
 from torch.nn import functional as F
 from torch import optim
-from .base_model import BaseModel
+from base_model import BaseModel
 
-# config = \
-# {
-#     'total_size': 284,
-#     'interactive_field_size': 9,
-#     'interactive_field_max_num_list': [73974, 397, 4122689, 850308, 462, 5, 89779, 75085, 641],
-#     'emb_size': 20,
-#     'no_inter_field_max_num_list': [69, 102, 102, 93, 102, 102, 102, 45, 75],
-#     'title_size': 134544+2,
-#     "attention":
-#     {
-#         "input_dim": None,  # input_dim should be set automatically
-#         "num_layers": 3,
-#         "head_num": 10,
-#         "att_emb_size": 20,
-#         # "head_num_list": [10, 5, 2, 1],
-#         "forward_dim": 200
-#     }
-# }
+config = \
+{
+    'total_size': 284,
+    'interactive_field_size': 9,
+    'interactive_field_max_num_list': [73974, 397, 4122689, 850308, 462, 5, 89779, 75085, 641],
+    'emb_size': 20,
+    'no_inter_field_max_num_list': [69, 102, 102, 93, 102, 102, 102, 45, 75],
+    'title_size': 134544+2,
+    "attention":
+    {
+        "input_dim": None,  # input_dim should be set automatically
+        "num_layers": 3,
+        "head_num": 10,
+        "att_emb_size": 20,
+        # "head_num_list": [10, 5, 2, 1],
+        "forward_dim": 200
+    }
+}
 
 
 class AFFM(nn.Module, BaseModel):
     def __init__(self, config):
         super(AFFM, self).__init__()
-        self.config = config["model_config"]["AFFM"]
-        # self.config = config
+        # self.config = config["model_config"]["AFFM"]
+        self.config = config
         self.path_config = config
         self.emb_size = self.config['emb_size']
         # interactive part 0 - 8
@@ -165,9 +165,9 @@ class AFFM(nn.Module, BaseModel):
 
         batch, _, _ = out.size()
         out = out.view(batch, -1)
-        y = self.linear(out)
+        y = F.sigmoid(self.linear(out))
 
-        return y
+        return y.squeeze()
 
 
 class Interac(nn.Module):
@@ -230,11 +230,11 @@ class Attention(nn.Module):
         return result
 
 
-model = NFFM(config)
+model = AFFM(config)
 print(model)
 x = t.FloatTensor(np.random.randint(1, 4, (3, 284)))
 y = model(x)
-print(y)
+print(y.size())
 
 
 
