@@ -161,6 +161,7 @@ class AFFM(nn.Module, BaseModel):
             out = self.linear_layer[i](out)
             if i != len(self.linear_layer) - 1:
                 out = self.bn[i](out)
+                out = F.elu(out)
 
         y = F.sigmoid(out)
 
