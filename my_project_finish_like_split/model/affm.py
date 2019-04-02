@@ -4,7 +4,7 @@ from torch.autograd import Variable as V
 from torch import nn
 from torch.nn import functional as F
 from torch import optim
-from base_model import BaseModel
+from .base_model import BaseModel
 
 config = \
 {
@@ -30,8 +30,8 @@ config = \
 class AFFM(nn.Module, BaseModel):
     def __init__(self, config):
         super(AFFM, self).__init__()
-        # self.config = config["model_config"]["AFFM"]
-        self.config = config
+        self.config = config["model_config"]["AFFM"]
+        # self.config = config
         self.path_config = config
         self.emb_size = self.config['emb_size']
         # interactive part 0 - 8
@@ -229,11 +229,12 @@ class Attention(nn.Module):
         return result
 
 
-model = AFFM(config)
-print(model)
-x = t.FloatTensor(np.random.randint(1, 4, (3, 284)))
-y = model(x)
-print(y.size())
+if __name__ == "__main__":
+    model = AFFM(config)
+    print(model)
+    x = t.FloatTensor(np.random.randint(1, 4, (3, 284)))
+    y = model(x)
+    print(y.size())
 
 
 
