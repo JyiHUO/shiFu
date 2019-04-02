@@ -14,6 +14,7 @@ config = \
     'emb_size': 20,
     'no_inter_field_max_num_list': [69, 102, 102, 93, 102, 102, 102, 45, 75],
     'title_size': 134544+2,
+    "layers": [256, 256, 128, 128, 64, 32, 1],
     "attention":
     {
         "input_dim": None,  # input_dim should be set automatically
@@ -73,24 +74,23 @@ class AFFM(nn.Module, BaseModel):
               + self.emb_size * self.config['interactive_field_size'] * 2 + self.emb_size + 2 * self.emb_size
         print(dim)  # something wrong in this place
 
-        # this is deep part
-        # start = int(dim)
-        # linear_layer = []
-        # bn = []
-        # for end in self.config["layers"]:
-        #     linear_layer.append(nn.Linear(start, end))
-        #     start = end
-        #     if end != 1:
-        #         bn.append(nn.BatchNorm1d(end))
-        # self.linear_layer = nn.ModuleList(linear_layer)
-        # self.bn = nn.ModuleList(bn)
 
         # this is attention part
         self.config["attention"]["input_dim"] = int(dim)
         self.att1 = Attention(self.config)
-        self.att2 = Attention(self.config)
+        # self.att2 = Attention(self.config)
 
-        self.linear = nn.Linear(66*self.config['emb_size'],1)
+        # deep part
+        start = 66*self.config["attention"]['att_emb_size']*self.config["attention"]["head_num"]
+        linear_layer = []
+        bn = []
+        for end in self.config["layers"]:
+            linear_layer.append(nn.Linear(start, end))
+            start = end
+            if end != 1:
+                bn.append(nn.BatchNorm1d(end))
+        self.linear_layer = nn.ModuleList(linear_layer)
+        self.bn = nn.ModuleList(bn)
 
     def forward(self, x):
         """
@@ -129,43 +129,40 @@ class AFFM(nn.Module, BaseModel):
 
         # video feature
         x_video = self.video_out(x[:, 28:156].float())
-        print("video input")
-        print(x[:, 28:156].size())
+        # print("video input")
+        # print(x[:, 28:156].size())
 
         # autio feature
         x_autio = self.audio_out(x[:, 156:].float())
-        print("audio input")
-        print(x[:, 156:].size())
+        # print("audio input")
+        # print(x[:, 156:].size())
 
         total_features = []
         total_features.extend(interac_one_order_features)
-        print(len(total_features))
+        # print(len(total_features))
         total_features.extend(interac_second_order_features)
-        print(len(total_features))
+        # print(len(total_features))
         total_features.extend(no_inc_one_order_features)
-        print(len(total_features))
+        # print(len(total_features))
         total_features.append(title_feature.unsqueeze(1))
         total_features.append(x_video.unsqueeze(1))
         total_features.append(x_autio.unsqueeze(1))
 
         out = t.cat(total_features, dim=1)  # batch * m * emb_size
 
-        # DNN part
-        # for i in range(len(self.linear_layer)):
-        #     out = self.linear_layer[i](out)
-        #     if i != len(self.linear_layer) - 1:
-        #         out = self.bn[i](out)
-        #
-        # y = F.sigmoid(out)
-
         # attention part
-        out = self.att1(out)
-        out = self.att2(out)
-        out = self.att2(out)
-
+        out = self.att1(out)  # batch , m , att_emb_size*head_num
+        # out = self.att2(out)
         batch, _, _ = out.size()
         out = out.view(batch, -1)
-        y = F.sigmoid(self.linear(out))
+
+        # DNN part
+        for i in range(len(self.linear_layer)):
+            out = self.linear_layer[i](out)
+            if i != len(self.linear_layer) - 1:
+                out = self.bn[i](out)
+
+        y = F.sigmoid(out)
 
         return y.squeeze()
 
@@ -204,7 +201,7 @@ class Attention(nn.Module):
         self.w_query = nn.Linear(emb_size, self.att_emb_size*self.head_num, bias=False)
         self.w_keys = nn.Linear(emb_size, self.att_emb_size*self.head_num, bias=False)
         self.w_values = nn.Linear(emb_size, self.att_emb_size*self.head_num, bias=False)
-        self.w_resnet = nn.Linear(emb_size, self.att_emb_size, bias=False)
+        self.w_resnet = nn.Linear(emb_size, self.att_emb_size*self.head_num, bias=False)
 
     def forward(self, x):
         '''
@@ -222,10 +219,11 @@ class Attention(nn.Module):
         result = att_score.matmul(values)  # head_num * batch * m * att_emb_size
 
         # head compress, may need some modification
-        result = t.mean(result, 0)  # batch * m * att_emb_size
+        # result = t.mean(result, 0)  # batch * m * att_emb_size
+        result = result.view(batch, m, -1)  # batch, m * att_emb_size * head_num
 
         # theme from resnet
-        result = F.relu(result + self.w_resnet(x))  # batch * m * att_emb_size
+        result = F.relu(result + self.w_resnet(x))  # batch , m , att_emb_size*head_num
 
         return result
 

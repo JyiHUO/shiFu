@@ -58,7 +58,7 @@ class Engine(object):
         # gradient update
         loss.backward()
         self.opt.step()
-        self.scheduler.step()
+        # self.scheduler.step()
 
         return loss.cpu().detach().numpy(), auc
 
